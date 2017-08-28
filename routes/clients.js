@@ -12,7 +12,7 @@ const config = require('../config/database');
 router.post('/addClient', (req, res) => {
     let newClient = new Client({
         firstName: req.body.firstName,
-        lastName: req.body.lastNamem,
+        lastName: req.body.lastName,
         email: req.body.email,
         password: req.body.password,
         contact: req.body.contact,
