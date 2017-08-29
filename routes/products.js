@@ -9,6 +9,7 @@ const Product = require('../models/product');
 
 //Add Product
 router.post('/addProduct', (req, res) => {
+    console.log(req.body);
     let newProduct = new Product({
         productDetails: req.body.productDetails,
         productSellPrice: req.body.productSellPrice,
@@ -54,7 +55,7 @@ router.get('/products', (req, res) => {
 
 //Get Product By Product Number
 router.get('/product/:id', (req, res, next) => {
-    Product.getProductByProductNumber({productNumber: req.params.id}, (err, product) => {
+    Product.getProductByProductNumber(req.params.id, (err, product) => {
         if(err) {
             res.json({
                 success: false,
@@ -87,7 +88,8 @@ router.put('/edit/:id', (req, res, next) => {
 });
 
 //Delete Product
-router.put('/delete/:id', (req, res, next) => {
+router.delete('/delete/:id', (req, res, next) => {
+    console.log(req.params);
     Product.remove({_id: mongojs.ObjectId(req.params.id)}, (err, product) => {
         if(err) {
             console.log(err);
@@ -96,7 +98,7 @@ router.put('/delete/:id', (req, res, next) => {
             res.json({
                 success: true,
                 msg: 'Product Deleted',
-                client: client
+                product: product
             });
         }
     });

@@ -11,10 +11,7 @@ const ProductSchema = mongoose.Schema({
         name: String,
         description: String,
         unit: String,
-        image: {
-            data: Buffer,
-            contentType: String
-        }
+        image: String
     },
     productSellPrice: {
         type: Number
@@ -48,9 +45,10 @@ module.exports.addProduct = (newProduct, callback) => {
     newProduct.productDetails.name = newProduct.productDetails.name;
     newProduct.productDetails.description = newProduct.productDetails.description;
     newProduct.productDetails.unit = newProduct.productDetails.unit;
-    newProduct.productDetails.image.data = fs.readFileSync(newProduct.productDetails.image.path);
-    newProduct.productDetails.image.contentType = 'image/*';
-    
+    console.log('In AddProduct, this is newProduct:');
+    console.log(newProduct);
+    console.log(newProduct.productDetails.image);
+    newProduct.productDetails.image = newProduct.productDetails.image;
     newProduct.save(callback);
 }
 
@@ -62,11 +60,13 @@ function genProductNumber() {
     const identifier = "PROD";
     const possibleChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-    const id = '';
+    let id = '';
 
     for(let i = 0; i < 6; i++) {
-        id += identifier + "-" + possibleChars.charAt(Math.random() * possibleChars.length);
+        id += possibleChars.charAt(Math.random() * possibleChars.length);
     }
+
+    id = identifier + "-" + id;
 
     return id;
 }
