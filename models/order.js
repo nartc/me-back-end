@@ -61,7 +61,7 @@ module.exports.getAllOrders = (callback) => {
 }
 
 function genOrderNumber() {
-    const identifier = "VEN";
+    const identifier = "MEC";
     const possibleChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
     const id = '';

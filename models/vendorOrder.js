@@ -48,7 +48,7 @@ module.exports.addVendorOrder = (newVendorOrder, callback) => {
 }
 
 function genOrderNumber() {
-    const identifier = "MEC";
+    const identifier = "VEN";
     const possibleChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
     const id = '';
