@@ -9,7 +9,6 @@ const Product = require('../models/product');
 
 //Add Product
 router.post('/addProduct', (req, res) => {
-    console.log(req.body);
     let newProduct = new Product({
         productDetails: req.body.productDetails,
         productSellPrice: req.body.productSellPrice,
@@ -89,7 +88,6 @@ router.put('/edit/:id', (req, res, next) => {
 
 //Delete Product
 router.delete('/delete/:id', (req, res, next) => {
-    console.log(req.params);
     Product.remove({_id: mongojs.ObjectId(req.params.id)}, (err, product) => {
         if(err) {
             console.log(err);

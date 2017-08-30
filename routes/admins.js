@@ -83,7 +83,6 @@ router.post('/authenticate', (req, res, next) => {
 });
 
 router.get('/profile', passport.authenticate('jwt', {session: false}), (req, res, next) => {
-    console.log(req);
     res.json({
         admin: req.user
     });
@@ -91,7 +90,6 @@ router.get('/profile', passport.authenticate('jwt', {session: false}), (req, res
 
 //Change Password
 router.put('/password', (req, res, next) => {
-    console.log(req.body);
     let candidatePassword = req.body.candidatePassword;
     let newPassword = req.body.newPassword;
     let currentPassword = req.body.admin.password;

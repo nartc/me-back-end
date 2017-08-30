@@ -70,7 +70,7 @@ app.get('/', (req, res) => {
     res.send('Invalid Endpoint');
 });
 
-All Routes
+//All Routes
 app.all('/*', (req, res, next) => {
     res.sendFile('build/index.html', {root: __dirname});
 });
