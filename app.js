@@ -61,7 +61,7 @@ require('./config/passport')(passport);
 //Routes
 app.use('/admins', admins);
 app.use('/clients', clients);
-// app.use('/orders', orders);
+app.use('/orders', orders);
 // app.use('/vendorOrders', vendorOrders);
 app.use('/products', products);
 

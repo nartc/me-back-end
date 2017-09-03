@@ -16,17 +16,7 @@ const OrderSchema = mongoose.Schema({
     orderBalance: {
         type: Number
     },
-    orderDetails: [
-        {
-            products: {
-                productNumber: String,
-                productName: String,
-                productPrice: Number,
-                productQuantity: Number,
-                totalBalance: Number
-            }
-        }
-    ],
+    orderDetails: Array,
     isDelivered: {
         type: Boolean
     },
@@ -35,9 +25,9 @@ const OrderSchema = mongoose.Schema({
     }
 });
 
-const Order = modules.exports = mongoose.model('Order', OrderSchema);
+const Order = module.exports = mongoose.model('Order', OrderSchema);
 
-modules.exports.getOrderById = (id, calback) => {
+module.exports.getOrderById = (id, calback) => {
     Order.findById(id, callback);
 }
 
@@ -52,23 +42,12 @@ module.exports.getOrderByUserId = (userId, callback) => {
 }
 
 module.exports.addOrder = (newOrder, callback) => {
-    newOrder.orderNumber = genOrderNumber();
+    newOrder.isDelivered = false;
+    newOrder.isPaid = false;
+
     newOrder.save(callback);
 }
 
 module.exports.getAllOrders = (callback) => {
     Order.find(callback);
-}
-
-function genOrderNumber() {
-    const identifier = "MEC";
-    const possibleChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-    const id = '';
-
-    for(let i = 0; i < 9; i++) {
-        id += identifier + "-" + possibleChars.charAt(Math.random() * possibleChars.length);
-    }
-
-    return id;
 }

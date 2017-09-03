@@ -1,7 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const passport = require('passport');
-const config = require('../config/database');
 const mongojs = require('mongojs');
 const fs = require('fs');
 
