@@ -31,6 +31,7 @@ const clients = require('./routes/clients');
 const orders = require('./routes/orders');
 const products = require('./routes/products');
 const vendorOrders = require('./routes/vendorOrders');
+const coupons = require('./routes/coupons');
 
 //Port Number
 const port = process.env.PORT || 8080;
@@ -64,6 +65,7 @@ app.use('/clients', clients);
 app.use('/orders', orders);
 // app.use('/vendorOrders', vendorOrders);
 app.use('/products', products);
+app.use('/coupons', coupons);
 
 //Index Route
 app.get('/', (req, res) => {

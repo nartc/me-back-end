@@ -33,7 +33,7 @@ router.post('/saveOrder', (req, res) => {
 
 //Get All Orders
 router.get('/orders', (req, res) => {
-    Product.getAllOrders((err, orders) => {
+    Order.getAllOrders((err, orders) => {
         if(err) {
             console.log(err);
             res.json({
