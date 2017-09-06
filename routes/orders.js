@@ -70,7 +70,6 @@ router.get('/orders', (req, res) => {
 
  //Get Orders by UserId
  router.get('/orders/:userId', (req, res, next) => {
-     console.log(req.params);
     Order.getOrderByUserId(req.params.userId, (err, orders) => {
         if(err) {
             res.json({
@@ -82,6 +81,38 @@ router.get('/orders', (req, res) => {
                 success: true,
                 msg: 'Fetched orders by UserId',
                 orders: orders
+            });
+        }
+    });
+ });
+
+ //Update Delivery Status
+ router.put('/updateDelivery/:id', (req, res, next) => {
+    Order.findByIdAndUpdate({_id: mongojs.ObjectId(req.params.id)}, {$set: {isDelivered: req.body.deliveredStatus}}, {new: true}, (err, order) => {
+        if(err) {
+            console.log(err);
+            return next(err);
+        } else {
+            res.json({
+                success: true,
+                msg: 'Delivery Status Updated',
+                order: order
+            });
+        }
+    });
+ });
+
+  //Update Payment Status
+  router.put('/updatePayment/:id', (req, res, next) => {
+    Order.findByIdAndUpdate({_id: mongojs.ObjectId(req.params.id)}, {$set: {isPaid: req.body.paidStatus}}, {new: true}, (err, order) => {
+        if(err) {
+            console.log(err);
+            return next(err);
+        } else {
+            res.json({
+                success: true,
+                msg: 'Paid Status Updated',
+                order: order
             });
         }
     });

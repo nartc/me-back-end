@@ -84,6 +84,22 @@ router.put('/edit/:id', (req, res, next) => {
     });
 });
 
+//Update Product Instock
+router.put('/editInstock/:id', (req, res, next) => {
+    Product.findByIdAndUpdate({_id: mongojs.ObjectId(req.params.id)}, {$inc:{inStock: req.body.quantity}}, {new: true}, (err, product) => {
+        if(err) {
+            console.log(err);
+            return next(err);
+        } else {
+            res.json({
+                success: true,
+                msg: 'Product InStock Updated',
+                product: product
+            });
+        }
+    });
+});
+
 //Delete Product
 router.delete('/delete/:id', (req, res, next) => {
     Product.remove({_id: mongojs.ObjectId(req.params.id)}, (err, product) => {

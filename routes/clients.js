@@ -196,7 +196,6 @@ router.put('/update/:id', (req, res, next) => {
 
 //Update Client Balance
 router.put('/balanceUpdate/:id', (req, res, next) => {
-    console.log('Balance coming in:', req.body);    
     Client.findByIdAndUpdate({_id: mongojs.ObjectId(req.params.id)}, {$inc:{balance: req.body.balance}}, {new: true}, (err, client) => {
         if(err) {
             console.log(err);
