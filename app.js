@@ -30,7 +30,7 @@ const admins = require('./routes/admins');
 const clients = require('./routes/clients');
 const orders = require('./routes/orders');
 const products = require('./routes/products');
-const vendorOrders = require('./routes/vendorOrders');
+const vendorOrders = require('./routes/vendor-orders');
 const coupons = require('./routes/coupons');
 
 //Port Number
@@ -63,7 +63,7 @@ require('./config/passport')(passport);
 app.use('/admins', admins);
 app.use('/clients', clients);
 app.use('/orders', orders);
-// app.use('/vendorOrders', vendorOrders);
+app.use('/vendor-orders', vendorOrders);
 app.use('/products', products);
 app.use('/coupons', coupons);
 
