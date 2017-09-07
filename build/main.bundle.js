@@ -34,7 +34,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-navbar></app-navbar>\n<div class=\"container\">\n    <ng-progress\n    [positionUsing]=\"'marginLeft'\" \n    [minimum]=\"0.15\" \n    [maximum]=\"1\"\n    [speed]=\"200\" \n    [direction]=\"'leftToRightIncreased'\"\n    [color]=\"'#67b021'\" \n    [trickleSpeed]=\"250\"\n    [thick]=\"true\" \n    [ease]=\"'easeInSine'\"\n  ></ng-progress>\n  <flash-messages></flash-messages>\n  <router-outlet></router-outlet>\n</div>"
+module.exports = "<app-navbar></app-navbar>\n<div class=\"container\">\n    <ng-progress\n    [positionUsing]=\"'marginLeft'\" \n    [minimum]=\"0.15\" \n    [maximum]=\"1\"\n    [direction]=\"'leftToRightIncreased'\"\n    [color]=\"'#67b021'\" \n    [trickleSpeed]=\"500\"\n    [thick]=\"true\" \n    [ease]=\"'easeInSine'\"\n  ></ng-progress>\n  <flash-messages></flash-messages>\n  <router-outlet></router-outlet>\n</div>"
 
 /***/ }),
 
