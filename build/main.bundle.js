@@ -34,7 +34,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-navbar></app-navbar>\n<div class=\"container\">\n  <flash-messages></flash-messages>\n  <router-outlet></router-outlet>\n</div>\n<app-footer></app-footer>"
+module.exports = "<app-navbar></app-navbar>\n<div class=\"container\">\n  <flash-messages></flash-messages>\n  <router-outlet></router-outlet>\n</div>"
 
 /***/ }),
 
@@ -2100,7 +2100,7 @@ var _a, _b, _c, _d, _e, _f, _g, _h, _j;
 /***/ "../../../../../src/app/components/footer/footer.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <div class=\"push\"></div> -->\n<footer class=\"footer\">\n  <div class=\"container\">\n          <h1 class=\"h3\">MEAN eCommerce</h1>\n          <p>Copyright &copy; 2017, CT</p>\n  </div>\n</footer>"
+module.exports = "<div class=\"push\"></div>\n<footer class=\"footer\">\n  <div class=\"container\">\n          <h1 class=\"h3\">MEAN eCommerce</h1>\n          <p>Copyright &copy; 2017, CT</p>\n  </div>\n</footer>"
 
 /***/ }),
 
@@ -2112,7 +2112,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".footer {\n  position: absolute;\n  width: 100%;\n  bottom: 0;\n  opacity: 0.8;\n  height: 100px;\n  border-top: 2px solid #67b021;\n  background-color: #343a40; }\n\n.push {\n  height: 120px; }\n\n.container {\n  padding-top: 15px;\n  color: #67b021;\n  text-align: center; }\n", ""]);
+exports.push([module.i, ".footer {\n  position: fixed;\n  width: 100%;\n  bottom: 0;\n  opacity: 0.8;\n  height: 100px;\n  border-top: 2px solid #67b021;\n  background-color: #343a40; }\n\n.push {\n  height: 300px; }\n\n.container {\n  padding-top: 15px;\n  color: #67b021;\n  text-align: center; }\n", ""]);
 
 // exports
 
@@ -2161,7 +2161,7 @@ FooterComponent = __decorate([
 /***/ "../../../../../src/app/components/home/home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  home works!\n</p>\n"
+module.exports = "<div class=\"wrapper\">\n  <header id=\"home-section\">\n    <div class=\"dark-overlay\">\n      <div class=\"home-inner\">\n        <div class=\"ui-g-12\">\n          <h1 class=\"display-4\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad, ipsum.</h1>\n        </div>\n        <div class=\"ui-g-12\" *ngIf=\"!authService.isLoggedIn() || !clientService.isLoggedIn()\" id=\"btnDiv\">\n          <button \n            pButton\n            type=\"button\"\n            label=\"SIGN UP\"\n            id=\"homeButton\"\n            (click)=\"onClick()\"\n          >\n          </button>\n        </div>    \n      </div>\n    </div>\n  </header>\n\n  <section class=\"section section-primary\">\n    <h2>Section One</h2>\n    <p>\n      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ab ut delectus ad error, eos a reiciendis soluta ex dolorum voluptatem assumenda aliquid in recusandae aut illum nihil id consequatur ullam deleniti cumque minima itaque fugit? Sit distinctio unde, a repellat hic perspiciatis veniam, nulla autem doloremque laboriosam debitis ex dicta soluta, quo quibusdam eius ad ut deleniti sed laudantium? Asperiores beatae a impedit culpa sapiente deserunt officia voluptate at unde. Nam, impedit, quo nobis repellat voluptates tenetur amet temporibus rem, nemo vitae optio id adipisci quis est reprehenderit! Blanditiis eaque itaque accusantium eos impedit nihil, natus distinctio quis deserunt quaerat.\n    </p>\n  </section>\n\n  <div class=\"pimg1\">\n    <div class=\"dark-overlay-1\">\n      <div class=\"ptext\">\n          <h1 class=\"display-4\">Lorem ipsum dolor sit amet. </h1> \n      </div>\n    </div>\n  </div>\n\n  <section class=\"section section-dark\">\n      <h2>Section Two</h2>\n      <p>\n        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ab ut delectus ad error, eos a reiciendis soluta ex dolorum voluptatem assumenda aliquid in recusandae aut illum nihil id consequatur ullam deleniti cumque minima itaque fugit? Sit distinctio unde, a repellat hic perspiciatis veniam, nulla autem doloremque laboriosam debitis ex dicta soluta, quo quibusdam eius ad ut deleniti sed laudantium? Asperiores beatae a impedit culpa sapiente deserunt officia voluptate at unde. Nam, impedit, quo nobis repellat voluptates tenetur amet temporibus rem, nemo vitae optio id adipisci quis est reprehenderit! Blanditiis eaque itaque accusantium eos impedit nihil, natus distinctio quis deserunt quaerat.\n      </p>\n    </section>\n\n    <div class=\"pimg2\">\n      <div class=\"dark-overlay-2\">\n        <div class=\"ptext\">\n            <h1 class=\"display-4\">Lorem ipsum dolor sit amet. </h1> \n        </div>\n      </div>\n    </div>\n\n    <section class=\"section section-primary\">\n      <h2>Section Three</h2>\n      <p>\n        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ab ut delectus ad error, eos a reiciendis soluta ex dolorum voluptatem assumenda aliquid in recusandae aut illum nihil id consequatur ullam deleniti cumque minima itaque fugit? Sit distinctio unde, a repellat hic perspiciatis veniam, nulla autem doloremque laboriosam debitis ex dicta soluta, quo quibusdam eius ad ut deleniti sed laudantium? Asperiores beatae a impedit culpa sapiente deserunt officia voluptate at unde. Nam, impedit, quo nobis repellat voluptates tenetur amet temporibus rem, nemo vitae optio id adipisci quis est reprehenderit! Blanditiis eaque itaque accusantium eos impedit nihil, natus distinctio quis deserunt quaerat.\n      </p>\n    </section>\n\n    <div class=\"pimg3\">\n      <div class=\"dark-overlay-3\">\n        <div class=\"ptext\">\n            <h1 class=\"h3\">MEAN eCommerce</h1>\n            <h1 class=\"h5\">Copyright &copy; 2017, CT</h1>\n        </div>\n      </div>\n    </div>\n\n</div>  \n  "
 
 /***/ }),
 
@@ -2173,7 +2173,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "@media (min-width: 1200px) {\n  .wrapper {\n    max-width: 100%; } }\n\n@media (min-width: 992px) {\n  .wrapper {\n    max-width: 100%; } }\n\n@media (min-width: 768px) {\n  .wrapper {\n    max-width: 100%; } }\n\n@media (min-width: 576px) {\n  .wrapper {\n    max-width: 100%; } }\n\n.wrapper {\n  position: absolute;\n  top: 58px;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  margin-bottom: 120px; }\n\n#home-section {\n  background: url(\"https://static.pexels.com/photos/75627/pexels-photo-75627.jpeg\") no-repeat;\n  min-height: 700px;\n  background-size: cover;\n  background-attachment: fixed; }\n\n.dark-overlay {\n  background-color: rgba(0, 0, 0, 0.7);\n  position: absolute;\n  left: 0;\n  width: 100%;\n  min-height: 700px; }\n\ndiv.home-inner h1 {\n  text-align: center;\n  margin-top: 270px; }\n\nh1 {\n  color: #67b021;\n  opacity: 0.8; }\n\n#btnDiv {\n  text-align: center; }\n\n.pimg3 {\n  background-image: url(\"https://static.pexels.com/photos/3008/drinks-supermarket-cans-beverage.jpg\");\n  min-height: 100%; }\n\n.dark-overlay-3 {\n  background-color: rgba(0, 0, 0, 0.7);\n  position: absolute;\n  width: 100%;\n  min-height: 100%; }\n\n.pimg2 {\n  background-image: url(\"https://static.pexels.com/photos/157039/pexels-photo-157039.jpeg\");\n  min-height: 400px; }\n\n.dark-overlay-2 {\n  background-color: rgba(0, 0, 0, 0.7);\n  position: absolute;\n  width: 100%;\n  min-height: 400px; }\n\n.pimg1 {\n  background-image: url(\"https://static.pexels.com/photos/357577/pexels-photo-357577.jpeg\");\n  min-height: 400px; }\n\n.dark-overlay-1 {\n  background-color: rgba(0, 0, 0, 0.7);\n  position: absolute;\n  width: 100%;\n  min-height: 400px; }\n\n.pimg1, .pimg2, .pimg3 {\n  position: relative;\n  background-position: center;\n  background-size: cover;\n  background-repeat: no-repeat;\n  /*To remove Parallax, scroll instead of fixed */\n  background-attachment: fixed; }\n\n.section {\n  text-align: center;\n  padding: 50px 80px; }\n\n.section-primary {\n  background-color: #67b021;\n  color: #fff;\n  border-top: 1px solid #343a40;\n  border-bottom: 1px solid #343a40;\n  opacity: 0.8; }\n\n.section-dark {\n  background-color: #343a40;\n  color: #67b021;\n  border-top: 1px solid #67b021;\n  border-bottom: 1px solid #67b021;\n  opacity: 0.8; }\n\n.ptext {\n  position: absolute;\n  top: 40%;\n  width: 100%;\n  text-align: center; }\n\n.pimg3 .ptext {\n  top: 50%; }\n", ""]);
 
 // exports
 
@@ -2188,6 +2188,9 @@ module.exports = module.exports.toString();
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_auth_service__ = __webpack_require__("../../../../../src/app/services/auth.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_client_service__ = __webpack_require__("../../../../../src/app/services/client.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomeComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2199,10 +2202,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
+
 var HomeComponent = (function () {
-    function HomeComponent() {
+    function HomeComponent(router, authService, clientService) {
+        this.router = router;
+        this.authService = authService;
+        this.clientService = clientService;
     }
     HomeComponent.prototype.ngOnInit = function () {
+    };
+    HomeComponent.prototype.onClick = function () {
+        this.router.navigate(['/register']);
     };
     return HomeComponent;
 }());
@@ -2212,9 +2224,10 @@ HomeComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/components/home/home.component.html"),
         styles: [__webpack_require__("../../../../../src/app/components/home/home.component.scss")]
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_auth_service__["a" /* AuthService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_auth_service__["a" /* AuthService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__services_client_service__["a" /* ClientService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_client_service__["a" /* ClientService */]) === "function" && _c || Object])
 ], HomeComponent);
 
+var _a, _b, _c;
 //# sourceMappingURL=home.component.js.map
 
 /***/ }),
