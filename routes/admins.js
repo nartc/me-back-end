@@ -56,9 +56,7 @@ router.post('/authenticate', (req, res, next) => {
             console.log(password, admin.password);
             if(err) throw err;
             if(isMatched) {
-                const token = jwt.sign(admin, config.secret, {
-                    expiresIn: 18000
-                });
+                const token = jwt.sign(JSON.stringify(admin), config.secret);
 
                 res.json({
                     success: true,

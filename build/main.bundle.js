@@ -2659,7 +2659,6 @@ var ProductAddComponent = (function () {
             var reader_1 = new FileReader();
             reader_1.onloadend = function () {
                 console.log('RESULT', reader_1.result);
-                value.productDetails.image[0] = reader_1.result;
                 _this.product.productDetails.image = reader_1.result;
                 _this.postProduct(_this.product);
             };
