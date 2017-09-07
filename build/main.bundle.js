@@ -4377,7 +4377,7 @@ var HttpService = HttpService_1 = (function () {
 HttpService.host = "localhost";
 HttpService.port = 8080;
 HttpService.domain = "me-commerce.herokuapp.com";
-//public static url = "http://" + HttpService.host + ":" + HttpService.port;  
+//   public static url = "http://" + HttpService.host + ":" + HttpService.port;  
 HttpService.url = "https://" + HttpService_1.domain;
 HttpService = HttpService_1 = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),

@@ -53,6 +53,7 @@ router.post('/authenticate', (req, res, next) => {
         }
 
         Admin.comparePassword(password, admin.password, (err, isMatched) => {
+            console.log(password, admin.password);
             if(err) {
                 console.log(err);
             }
