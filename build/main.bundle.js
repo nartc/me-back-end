@@ -1971,6 +1971,8 @@ var DashboardComponent = (function () {
         this.activityService = activityService;
         this.hasBalance = false;
         this.role = '';
+        this.totalRevenue = 0;
+        this.totalExpenses = 0;
         this.hasExpenses = true;
     }
     DashboardComponent.prototype.ngOnInit = function () {
@@ -4378,7 +4380,7 @@ HttpService.host = "localhost";
 HttpService.port = 8080;
 HttpService.domain = "me-commerce.herokuapp.com";
 //   public static url = "http://" + HttpService.host + ":" + HttpService.port;  
-HttpService.url = "http://" + HttpService_1.domain;
+HttpService.url = "https://" + HttpService_1.domain;
 HttpService = HttpService_1 = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"]) === "function" && _a || Object])
