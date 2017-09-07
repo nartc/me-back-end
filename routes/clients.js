@@ -69,18 +69,6 @@ router.post('/authenticateClient', (req, res, next) => {
                         firstName: client.firstName
                     }
                 });
-
-                console.log(res.json({
-                    success: true,
-                    token: 'JWT '+token,
-                    msg: 'Logged In',
-                    client: {
-                        _id: client._id,
-                        email: client.email,
-                        role: client.role,
-                        firstName: client.firstName
-                    }
-                }));
             } else {
                 return res.json({
                     success: false,
