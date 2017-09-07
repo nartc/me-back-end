@@ -621,6 +621,527 @@ function toComment(sourceMap) {
 
 /***/ }),
 
+/***/ "../../../../ngx-progressbar/modules/ngx-progressbar.es5.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__ = __webpack_require__("../../../../rxjs/Subject.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__ = __webpack_require__("../../../../rxjs/Observable.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_observable_timer__ = __webpack_require__("../../../../rxjs/add/observable/timer.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_observable_timer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_observable_timer__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_switchMap__ = __webpack_require__("../../../../rxjs/add/operator/switchMap.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_switchMap___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_switchMap__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_do__ = __webpack_require__("../../../../rxjs/add/operator/do.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_do___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_do__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_takeWhile__ = __webpack_require__("../../../../rxjs/add/operator/takeWhile.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_takeWhile___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_takeWhile__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_rxjs_add_operator_finally__ = __webpack_require__("../../../../rxjs/add/operator/finally.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_rxjs_add_operator_finally___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_rxjs_add_operator_finally__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__angular_common__ = __webpack_require__("../../../common/@angular/common.es5.js");
+/* unused harmony export NgProgressService */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return NgProgressBrowserXhr; });
+/* unused harmony export NgProgressInterceptor */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NgProgressModule; });
+/* unused harmony export ɵb */
+/* unused harmony export ɵa */
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+
+
+
+
+
+
+
+
+
+
+/**
+ * Helper
+ */
+var clamp = function (n, min, max) {
+    if (n < min) {
+        return min;
+    }
+    if (n > max) {
+        return max;
+    }
+    return n;
+};
+var NgProgressService = (function () {
+    function NgProgressService() {
+        var _this = this;
+        /**
+         * Progress state
+         */
+        this.state = new __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__["Subject"]();
+        /**
+         * Trickling stream
+         */
+        this.trickling = new __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__["Subject"]();
+        this.progress = 0;
+        this.maximum = 1;
+        this.minimum = 0.08;
+        this.speed = 200;
+        this.trickleSpeed = 300;
+        this.trickling.switchMap(function () {
+            return __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["Observable"]
+                .timer(0, _this.trickleSpeed)
+                .takeWhile(function () { return _this.isStarted(); })
+                .do(function () { return _this.inc(); });
+        }).subscribe();
+    }
+    /**
+     * Start
+     * @return {?}
+     */
+    NgProgressService.prototype.start = function () {
+        if (!this.isStarted()) {
+            this.set(this.minimum);
+        }
+        this.trickling.next();
+    };
+    /**
+     * Done
+     * @return {?}
+     */
+    NgProgressService.prototype.done = function () {
+        /** if started complete the progress */
+        if (this.isStarted()) {
+            this.set(.3 + .5 * Math.random());
+            this.set(this.maximum);
+        }
+    };
+    /**
+     * Increment Progress
+     * @param {?=} amount
+     * @return {?}
+     */
+    NgProgressService.prototype.inc = function (amount) {
+        var /** @type {?} */ n = this.progress;
+        /** if it hasn't start, start */
+        if (!this.isStarted()) {
+            this.start();
+        }
+        else {
+            if (typeof amount !== 'number') {
+                if (n >= 0 && n < 0.2) {
+                    amount = 0.1;
+                }
+                else if (n >= 0.2 && n < 0.5) {
+                    amount = 0.04;
+                }
+                else if (n >= 0.5 && n < 0.8) {
+                    amount = 0.02;
+                }
+                else if (n >= 0.8 && n < 0.99) {
+                    amount = 0.005;
+                }
+                else {
+                    amount = 0;
+                }
+            }
+            n = clamp(n + amount, 0, 0.994);
+            this.set(n);
+        }
+    };
+    /**
+     * Set progress state
+     * @param {?} n
+     * @return {?}
+     */
+    NgProgressService.prototype.set = function (n) {
+        var _this = this;
+        this.progress = clamp(n, this.minimum, this.maximum);
+        this.updateState(this.progress, true);
+        /** if progress completed */
+        if (n === this.maximum) {
+            var /** @type {?} */ hide_1 = function () {
+                /**
+                 *  reset progress
+                 *  Keep it { 0, false } to fadeOut progress-bar after complete
+                 */
+                if (_this.progress >= _this.maximum) {
+                    _this.progress = 0;
+                    _this.updateState(_this.progress, false);
+                }
+            };
+            var /** @type {?} */ complete = function () {
+                /**
+                 * complete progressbar
+                 * { 1, false } to complete progress-bar before hiding
+                 */
+                if (_this.progress >= _this.maximum) {
+                    _this.updateState(_this.progress, false);
+                    setTimeout(hide_1, _this.speed);
+                }
+            };
+            setTimeout(complete, this.speed);
+        }
+    };
+    /**
+     * Is progress started
+     * @return {?}
+     */
+    NgProgressService.prototype.isStarted = function () {
+        return this.progress > 0 && this.progress < this.maximum;
+    };
+    /**
+     * Update Progressbar State
+     * @param {?} progress
+     * @param {?} isActive
+     * @return {?}
+     */
+    NgProgressService.prototype.updateState = function (progress, isActive) {
+        this.state.next({
+            active: isActive,
+            value: progress
+        });
+    };
+    return NgProgressService;
+}());
+NgProgressService.decorators = [
+    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"] },
+];
+/**
+ * @nocollapse
+ */
+NgProgressService.ctorParameters = function () { return []; };
+var NgProgressBrowserXhr = (function (_super) {
+    __extends(NgProgressBrowserXhr, _super);
+    /**
+     * @param {?} service
+     */
+    function NgProgressBrowserXhr(service) {
+        var _this = _super.call(this) || this;
+        _this.service = service;
+        _this.currentRequest = 0;
+        return _this;
+    }
+    /**
+     * @return {?}
+     */
+    NgProgressBrowserXhr.prototype.build = function () {
+        var _this = this;
+        var /** @type {?} */ xhr = _super.prototype.build.call(this);
+        xhr.onload = function (evt) { return _this.done(); };
+        xhr.onerror = function (evt) { return _this.done(); };
+        xhr.onabort = function (evt) { return _this.done(); };
+        xhr.onloadstart = function (event) {
+            _this.currentRequest++;
+            if (!_this.service.isStarted()) {
+                _this.service.start();
+            }
+        };
+        return xhr;
+    };
+    /**
+     * @return {?}
+     */
+    NgProgressBrowserXhr.prototype.done = function () {
+        this.currentRequest--;
+        if (this.currentRequest === 0) {
+            this.service.done();
+        }
+    };
+    return NgProgressBrowserXhr;
+}(__WEBPACK_IMPORTED_MODULE_7__angular_http__["BrowserXhr"]));
+NgProgressBrowserXhr.decorators = [
+    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"] },
+];
+/**
+ * @nocollapse
+ */
+NgProgressBrowserXhr.ctorParameters = function () { return [
+    { type: NgProgressService, },
+]; };
+var NgProgressInterceptor = (function () {
+    /**
+     * @param {?} progressService
+     */
+    function NgProgressInterceptor(progressService) {
+        this.progressService = progressService;
+    }
+    /**
+     * @param {?} req
+     * @param {?} next
+     * @return {?}
+     */
+    NgProgressInterceptor.prototype.intercept = function (req, next) {
+        var _this = this;
+        this.progressService.start();
+        return next.handle(req).finally(function () {
+            _this.progressService.done();
+        });
+    };
+    return NgProgressInterceptor;
+}());
+NgProgressInterceptor.decorators = [
+    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"] },
+];
+/**
+ * @nocollapse
+ */
+NgProgressInterceptor.ctorParameters = function () { return [
+    { type: NgProgressService, },
+]; };
+var ProgressBarComponent = (function () {
+    function ProgressBarComponent() {
+    }
+    /**
+     * Styles for progressbar
+     * @return {?}
+     */
+    ProgressBarComponent.prototype.barStyles = function () {
+        var /** @type {?} */ styles = {
+            transition: "all " + this.speed + "ms " + this.ease,
+            backgroundColor: this.color
+        };
+        /**
+         * Get positioning value
+         */
+        var n = (!this.state.value) ? {
+            leftToRightIncreased: -100,
+            leftToRightReduced: 0,
+            rightToLeftIncreased: 100,
+            rightToLeftReduced: 0
+        }[this.direction] : this.toPercentage(this.state.value);
+        switch (this.positionUsing) {
+            case 'translate3d':
+                styles = Object.assign({}, styles, {
+                    transform: "translate3d(" + n + "%,0,0)",
+                    '-webkit-transform': "translate3d(" + n + "%,0,0)",
+                    '-moz-transform': "translate3d(" + n + "%,0,0)",
+                    '-o-transform': "translate3d(" + n + "%,0,0)",
+                    '-ms-transform': "translate3d(" + n + "%,0,0)"
+                });
+                break;
+            case 'translate':
+                styles = Object.assign({}, styles, {
+                    transform: "translate(" + n + "%,0)",
+                    '-webkit-transform': "translate(" + n + "%,0)",
+                    '-moz-transform': "translate(" + n + "%,0)",
+                    '-o-transform': "translate(" + n + "%,0)",
+                    '-ms-transform': "translate(" + n + "%,0)"
+                });
+                break;
+            default:
+                styles = Object.assign({}, styles, {
+                    marginLeft: n + "%"
+                });
+        }
+        return styles;
+    };
+    /**
+     * Styles for progressbar tail
+     * @return {?}
+     */
+    ProgressBarComponent.prototype.shadowStyles = function () {
+        return {
+            boxShadow: "0 0 10px " + this.color + ", 0 0 5px " + this.color
+        };
+    };
+    /**
+     * @param {?} n
+     * @return {?}
+     */
+    ProgressBarComponent.prototype.toPercentage = function (n) {
+        return ({
+            leftToRightIncreased: -1 + n,
+            leftToRightReduced: -n,
+            rightToLeftIncreased: 1 - n,
+            rightToLeftReduced: n
+        }[this.direction]) * 100;
+    };
+    /**
+     * @return {?}
+     */
+    ProgressBarComponent.prototype.spinnerClasses = function () {
+        return {
+            leftToRightIncreased: 'clockwise',
+            leftToRightReduced: 'anti-clockwise',
+            rightToLeftIncreased: 'anti-clockwise',
+            rightToLeftReduced: 'clockwise'
+        }[this.direction];
+    };
+    return ProgressBarComponent;
+}());
+ProgressBarComponent.decorators = [
+    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"], args: [{
+                selector: 'ng-progress-bar',
+                template: "\n  <div class=\"ng-progress\" *ngIf=\"state\" [class.active]=\"state.active\" [class.thick]=\"thick\">\n    <div class=\"bar\" [ngStyle]=\"barStyles()\">\n      <div class=\"bar-shadow\" [ngStyle]=\"shadowStyles()\"></div>\n    </div>\n    <div *ngIf=\"showSpinner\" class=\"spinner\" [ngClass]=\"spinnerClasses()\">\n      <div class=\"spinner-icon\" [style.borderTopColor]=\"color\" [style.borderLeftColor]=\"color\"></div>\n    </div>\n  </div>",
+                styles: ["\n  .ng-progress {\n    z-index: 999999;\n    top: 0;\n    left: 0;\n    width: 100%;\n    position: fixed;\n    zoom: 1;\n    filter: alpha(opacity=0);\n    opacity: 0;\n    transition: opacity 200ms linear;\n  }\n\n  .active {\n    filter: alpha(opacity=100);\n    opacity: 1;\n    transition: none;\n  }\n\n  .bar {\n    position: absolute;\n    width: 100%;\n    height: 2px;\n  }\n\n  .thick .bar {\n    height: 3px;\n  }\n\n  .bar-shadow {\n    display: block;\n    position: absolute;\n    right: 0;\n    top: -3px;\n    width: 100px;\n    height: 100%;\n    opacity: 1.0;\n    -webkit-transform: rotate(3deg);\n    -ms-transform: rotate(3deg);\n    -moz-transform: rotate(3deg);\n    transform: rotate(3deg);\n  }\n\n\n  .thick .bar-shadow {\n    top: -4px;\n    -webkit-transform: rotate(4deg);\n    -ms-transform: rotate(4deg);\n    -moz-transform: rotate(4deg);\n    transform: rotate(4deg);\n  }\n\n  .thick .spinner-icon {\n    width: 24px;\n    height: 24px;\n    border: solid 3px transparent;\n  }\n\n  /* Remove these to get rid of the spinner */\n  .spinner {\n    display: block;\n    position: fixed;\n    z-index: 1031;\n    top: 15px;\n    right: 15px;\n  }\n\n  .spinner-icon {\n    width: 18px;\n    height: 18px;\n    box-sizing: border-box;\n\n    border: solid 2px transparent;\n    border-radius: 50%;\n\n    -webkit-animation: nprogress-spinner 400ms linear infinite;\n    -moz-animation: nprogress-spinner 400ms linear infinite;\n    animation: nprogress-spinner 400ms linear infinite;\n  }\n\n  .anti-clockwise .spinner-icon {\n    -webkit-animation-direction: reverse;\n    -moz-animation-direction: rotate(0deg);\n    animation-direction: reverse;\n  }\n\n  @-webkit-keyframes nprogress-spinner {\n    0% {\n      -webkit-transform: rotate(0deg);\n      -moz-transform: rotate(0deg);\n      transform: rotate(0deg);\n    }\n    100% {\n      -webkit-transform: rotate(360deg);\n      -moz-transform: rotate(360deg);\n      transform: rotate(360deg);\n    }\n  }\n\n  @keyframes nprogress-spinner {\n    0% {\n      -webkit-transform: rotate(0deg);\n      -moz-transform: rotate(0deg);\n      transform: rotate(0deg);\n    }\n    100% {\n      -webkit-transform: rotate(360deg);\n      -moz-transform: rotate(360deg);\n      transform: rotate(360deg);\n    }\n  }"],
+                changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush
+            },] },
+];
+/**
+ * @nocollapse
+ */
+ProgressBarComponent.ctorParameters = function () { return []; };
+ProgressBarComponent.propDecorators = {
+    'state': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
+    'positionUsing': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
+    'ease': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
+    'speed': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
+    'showSpinner': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
+    'direction': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
+    'thick': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
+    'color': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
+};
+var ProgressComponent = (function () {
+    /**
+     * @param {?} progress
+     */
+    function ProgressComponent(progress) {
+        this.progress = progress;
+        /**
+         * Progress options
+         */
+        this.ease = 'linear';
+        this.positionUsing = 'margin';
+        this.showSpinner = true;
+        this.direction = 'leftToRightIncreased';
+        this.color = '#CC181E';
+        this.thick = false;
+        this.maximum = 1;
+        this.minimum = 0.08;
+        this.speed = 200;
+        this.trickleSpeed = 300;
+    }
+    /**
+     * @param {?} changes
+     * @return {?}
+     */
+    ProgressComponent.prototype.ngOnChanges = function (changes) {
+        var /** @type {?} */ minChng = changes.minimum;
+        var /** @type {?} */ maxChng = changes.maximum;
+        var /** @type {?} */ spdChng = changes.speed;
+        var /** @type {?} */ tklSpdChng = changes.trickleSpeed;
+        var /** @type {?} */ tglChng = changes.toggle;
+        if (minChng) {
+            if (typeof minChng.currentValue !== 'undefined' && minChng.currentValue !== minChng.previousValue) {
+                if (minChng.currentValue < 0 || minChng.currentValue > 1) {
+                    throw 'Input [minimum] must be between 0 and 1';
+                }
+                else {
+                    this.progress.minimum = minChng.currentValue;
+                }
+            }
+        }
+        if (maxChng) {
+            if (typeof maxChng.currentValue !== 'undefined' && maxChng.currentValue !== maxChng.previousValue) {
+                if (maxChng.currentValue < 0 || maxChng.currentValue > 1) {
+                    throw 'Input [maximum] must be between 0 and 1';
+                }
+                else {
+                    this.progress.maximum = maxChng.currentValue;
+                }
+            }
+        }
+        if (spdChng) {
+            if (typeof spdChng.currentValue !== 'undefined' && spdChng.currentValue !== spdChng.previousValue) {
+                this.progress.speed = spdChng.currentValue;
+            }
+        }
+        if (tklSpdChng) {
+            if (typeof tklSpdChng.currentValue !== 'undefined' && tklSpdChng.currentValue !== tklSpdChng.previousValue) {
+                this.progress.trickleSpeed = tklSpdChng.currentValue;
+            }
+        }
+        if (tglChng) {
+            if (typeof tglChng.currentValue !== 'undefined' && tglChng.currentValue !== tglChng.previousValue) {
+                if (tglChng.currentValue) {
+                    this.progress.start();
+                }
+                else {
+                    this.progress.done();
+                }
+            }
+        }
+    };
+    /**
+     * @return {?}
+     */
+    ProgressComponent.prototype.ngOnDestroy = function () {
+        this.progress.state.unsubscribe();
+        this.progress.trickling.unsubscribe();
+    };
+    return ProgressComponent;
+}());
+ProgressComponent.decorators = [
+    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"], args: [{
+                selector: 'ng-progress',
+                template: "\n  <ng-progress-bar\n    [speed]=\"speed\"\n    [positionUsing]=\"positionUsing\"\n    [ease]=\"ease\"\n    [showSpinner]=\"showSpinner\"\n    [direction]=\"direction\"\n    [color]=\"color\"\n    [thick]=\"thick\"\n    [state]=\"progress.state | async\"\n  ></ng-progress-bar>",
+                styles: ["\n  :host {\n    z-index: 999999;\n    pointer-events: none;\n    position: relative;\n  }"],
+                changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush
+            },] },
+];
+/**
+ * @nocollapse
+ */
+ProgressComponent.ctorParameters = function () { return [
+    { type: NgProgressService, },
+]; };
+ProgressComponent.propDecorators = {
+    'ease': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
+    'positionUsing': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
+    'showSpinner': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
+    'direction': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
+    'color': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
+    'thick': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
+    'maximum': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
+    'minimum': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
+    'speed': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
+    'trickleSpeed': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
+    'toggle': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
+};
+var NgProgressModule = (function () {
+    function NgProgressModule() {
+    }
+    return NgProgressModule;
+}());
+NgProgressModule.decorators = [
+    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"], args: [{
+                declarations: [
+                    ProgressComponent,
+                    ProgressBarComponent
+                ],
+                exports: [
+                    ProgressComponent
+                ],
+                imports: [
+                    __WEBPACK_IMPORTED_MODULE_9__angular_common__["CommonModule"]
+                ],
+                providers: [
+                    NgProgressService
+                ]
+            },] },
+];
+/**
+ * @nocollapse
+ */
+NgProgressModule.ctorParameters = function () { return []; };
+/**
+ * Generated bundle index. Do not edit.
+ */
+
+//# sourceMappingURL=ngx-progressbar.es5.js.map
+
+
+/***/ }),
+
 /***/ "../../../../primeng/components/accordion/accordion.js":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -21403,6 +21924,62 @@ exports.OuterSubscriber = OuterSubscriber;
 
 /***/ }),
 
+/***/ "../../../../rxjs/Scheduler.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * An execution context and a data structure to order tasks and schedule their
+ * execution. Provides a notion of (potentially virtual) time, through the
+ * `now()` getter method.
+ *
+ * Each unit of work in a Scheduler is called an {@link Action}.
+ *
+ * ```ts
+ * class Scheduler {
+ *   now(): number;
+ *   schedule(work, delay?, state?): Subscription;
+ * }
+ * ```
+ *
+ * @class Scheduler
+ */
+var Scheduler = (function () {
+    function Scheduler(SchedulerAction, now) {
+        if (now === void 0) { now = Scheduler.now; }
+        this.SchedulerAction = SchedulerAction;
+        this.now = now;
+    }
+    /**
+     * Schedules a function, `work`, for execution. May happen at some point in
+     * the future, according to the `delay` parameter, if specified. May be passed
+     * some context object, `state`, which will be passed to the `work` function.
+     *
+     * The given arguments will be processed an stored as an Action object in a
+     * queue of actions.
+     *
+     * @param {function(state: ?T): ?Subscription} work A function representing a
+     * task, or some unit of work to be executed by the Scheduler.
+     * @param {number} [delay] Time to wait before executing the work, where the
+     * time unit is implicit and defined by the Scheduler itself.
+     * @param {T} [state] Some contextual data that the `work` function uses when
+     * called by the Scheduler.
+     * @return {Subscription} A subscription in order to be able to unsubscribe
+     * the scheduled work.
+     */
+    Scheduler.prototype.schedule = function (work, delay, state) {
+        if (delay === void 0) { delay = 0; }
+        return new this.SchedulerAction(this, work).schedule(state, delay);
+    };
+    Scheduler.now = Date.now ? Date.now : function () { return +new Date(); };
+    return Scheduler;
+}());
+exports.Scheduler = Scheduler;
+//# sourceMappingURL=Scheduler.js.map
+
+/***/ }),
+
 /***/ "../../../../rxjs/Subject.js":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -22120,6 +22697,44 @@ Observable_1.Observable.fromPromise = fromPromise_1.fromPromise;
 
 /***/ }),
 
+/***/ "../../../../rxjs/add/observable/timer.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__("../../../../rxjs/Observable.js");
+var timer_1 = __webpack_require__("../../../../rxjs/observable/timer.js");
+Observable_1.Observable.timer = timer_1.timer;
+//# sourceMappingURL=timer.js.map
+
+/***/ }),
+
+/***/ "../../../../rxjs/add/operator/do.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__("../../../../rxjs/Observable.js");
+var do_1 = __webpack_require__("../../../../rxjs/operator/do.js");
+Observable_1.Observable.prototype.do = do_1._do;
+Observable_1.Observable.prototype._do = do_1._do;
+//# sourceMappingURL=do.js.map
+
+/***/ }),
+
+/***/ "../../../../rxjs/add/operator/finally.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__("../../../../rxjs/Observable.js");
+var finally_1 = __webpack_require__("../../../../rxjs/operator/finally.js");
+Observable_1.Observable.prototype.finally = finally_1._finally;
+Observable_1.Observable.prototype._finally = finally_1._finally;
+//# sourceMappingURL=finally.js.map
+
+/***/ }),
+
 /***/ "../../../../rxjs/add/operator/map.js":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -22142,6 +22757,30 @@ var mergeMap_1 = __webpack_require__("../../../../rxjs/operator/mergeMap.js");
 Observable_1.Observable.prototype.mergeMap = mergeMap_1.mergeMap;
 Observable_1.Observable.prototype.flatMap = mergeMap_1.mergeMap;
 //# sourceMappingURL=mergeMap.js.map
+
+/***/ }),
+
+/***/ "../../../../rxjs/add/operator/switchMap.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__("../../../../rxjs/Observable.js");
+var switchMap_1 = __webpack_require__("../../../../rxjs/operator/switchMap.js");
+Observable_1.Observable.prototype.switchMap = switchMap_1.switchMap;
+//# sourceMappingURL=switchMap.js.map
+
+/***/ }),
+
+/***/ "../../../../rxjs/add/operator/takeWhile.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__("../../../../rxjs/Observable.js");
+var takeWhile_1 = __webpack_require__("../../../../rxjs/operator/takeWhile.js");
+Observable_1.Observable.prototype.takeWhile = takeWhile_1.takeWhile;
+//# sourceMappingURL=takeWhile.js.map
 
 /***/ }),
 
@@ -23332,6 +23971,120 @@ exports.ScalarObservable = ScalarObservable;
 
 /***/ }),
 
+/***/ "../../../../rxjs/observable/TimerObservable.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var isNumeric_1 = __webpack_require__("../../../../rxjs/util/isNumeric.js");
+var Observable_1 = __webpack_require__("../../../../rxjs/Observable.js");
+var async_1 = __webpack_require__("../../../../rxjs/scheduler/async.js");
+var isScheduler_1 = __webpack_require__("../../../../rxjs/util/isScheduler.js");
+var isDate_1 = __webpack_require__("../../../../rxjs/util/isDate.js");
+/**
+ * We need this JSDoc comment for affecting ESDoc.
+ * @extends {Ignored}
+ * @hide true
+ */
+var TimerObservable = (function (_super) {
+    __extends(TimerObservable, _super);
+    function TimerObservable(dueTime, period, scheduler) {
+        if (dueTime === void 0) { dueTime = 0; }
+        _super.call(this);
+        this.period = -1;
+        this.dueTime = 0;
+        if (isNumeric_1.isNumeric(period)) {
+            this.period = Number(period) < 1 && 1 || Number(period);
+        }
+        else if (isScheduler_1.isScheduler(period)) {
+            scheduler = period;
+        }
+        if (!isScheduler_1.isScheduler(scheduler)) {
+            scheduler = async_1.async;
+        }
+        this.scheduler = scheduler;
+        this.dueTime = isDate_1.isDate(dueTime) ?
+            (+dueTime - this.scheduler.now()) :
+            dueTime;
+    }
+    /**
+     * Creates an Observable that starts emitting after an `initialDelay` and
+     * emits ever increasing numbers after each `period` of time thereafter.
+     *
+     * <span class="informal">Its like {@link interval}, but you can specify when
+     * should the emissions start.</span>
+     *
+     * <img src="./img/timer.png" width="100%">
+     *
+     * `timer` returns an Observable that emits an infinite sequence of ascending
+     * integers, with a constant interval of time, `period` of your choosing
+     * between those emissions. The first emission happens after the specified
+     * `initialDelay`. The initial delay may be a {@link Date}. By default, this
+     * operator uses the `async` IScheduler to provide a notion of time, but you
+     * may pass any IScheduler to it. If `period` is not specified, the output
+     * Observable emits only one value, `0`. Otherwise, it emits an infinite
+     * sequence.
+     *
+     * @example <caption>Emits ascending numbers, one every second (1000ms), starting after 3 seconds</caption>
+     * var numbers = Rx.Observable.timer(3000, 1000);
+     * numbers.subscribe(x => console.log(x));
+     *
+     * @example <caption>Emits one number after five seconds</caption>
+     * var numbers = Rx.Observable.timer(5000);
+     * numbers.subscribe(x => console.log(x));
+     *
+     * @see {@link interval}
+     * @see {@link delay}
+     *
+     * @param {number|Date} initialDelay The initial delay time to wait before
+     * emitting the first value of `0`.
+     * @param {number} [period] The period of time between emissions of the
+     * subsequent numbers.
+     * @param {Scheduler} [scheduler=async] The IScheduler to use for scheduling
+     * the emission of values, and providing a notion of "time".
+     * @return {Observable} An Observable that emits a `0` after the
+     * `initialDelay` and ever increasing numbers after each `period` of time
+     * thereafter.
+     * @static true
+     * @name timer
+     * @owner Observable
+     */
+    TimerObservable.create = function (initialDelay, period, scheduler) {
+        if (initialDelay === void 0) { initialDelay = 0; }
+        return new TimerObservable(initialDelay, period, scheduler);
+    };
+    TimerObservable.dispatch = function (state) {
+        var index = state.index, period = state.period, subscriber = state.subscriber;
+        var action = this;
+        subscriber.next(index);
+        if (subscriber.closed) {
+            return;
+        }
+        else if (period === -1) {
+            return subscriber.complete();
+        }
+        state.index = index + 1;
+        action.schedule(state, period);
+    };
+    TimerObservable.prototype._subscribe = function (subscriber) {
+        var index = 0;
+        var _a = this, period = _a.period, dueTime = _a.dueTime, scheduler = _a.scheduler;
+        return scheduler.schedule(TimerObservable.dispatch, dueTime, {
+            index: index, period: period, subscriber: subscriber
+        });
+    };
+    return TimerObservable;
+}(Observable_1.Observable));
+exports.TimerObservable = TimerObservable;
+//# sourceMappingURL=TimerObservable.js.map
+
+/***/ }),
+
 /***/ "../../../../rxjs/observable/defer.js":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23395,6 +24148,17 @@ exports.merge = merge_1.mergeStatic;
 var ArrayObservable_1 = __webpack_require__("../../../../rxjs/observable/ArrayObservable.js");
 exports.of = ArrayObservable_1.ArrayObservable.of;
 //# sourceMappingURL=of.js.map
+
+/***/ }),
+
+/***/ "../../../../rxjs/observable/timer.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var TimerObservable_1 = __webpack_require__("../../../../rxjs/observable/TimerObservable.js");
+exports.timer = TimerObservable_1.TimerObservable.create;
+//# sourceMappingURL=timer.js.map
 
 /***/ }),
 
@@ -23658,6 +24422,126 @@ exports.concatMap = concatMap;
 
 /***/ }),
 
+/***/ "../../../../rxjs/operator/do.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var Subscriber_1 = __webpack_require__("../../../../rxjs/Subscriber.js");
+/* tslint:enable:max-line-length */
+/**
+ * Perform a side effect for every emission on the source Observable, but return
+ * an Observable that is identical to the source.
+ *
+ * <span class="informal">Intercepts each emission on the source and runs a
+ * function, but returns an output which is identical to the source as long as errors don't occur.</span>
+ *
+ * <img src="./img/do.png" width="100%">
+ *
+ * Returns a mirrored Observable of the source Observable, but modified so that
+ * the provided Observer is called to perform a side effect for every value,
+ * error, and completion emitted by the source. Any errors that are thrown in
+ * the aforementioned Observer or handlers are safely sent down the error path
+ * of the output Observable.
+ *
+ * This operator is useful for debugging your Observables for the correct values
+ * or performing other side effects.
+ *
+ * Note: this is different to a `subscribe` on the Observable. If the Observable
+ * returned by `do` is not subscribed, the side effects specified by the
+ * Observer will never happen. `do` therefore simply spies on existing
+ * execution, it does not trigger an execution to happen like `subscribe` does.
+ *
+ * @example <caption>Map every click to the clientX position of that click, while also logging the click event</caption>
+ * var clicks = Rx.Observable.fromEvent(document, 'click');
+ * var positions = clicks
+ *   .do(ev => console.log(ev))
+ *   .map(ev => ev.clientX);
+ * positions.subscribe(x => console.log(x));
+ *
+ * @see {@link map}
+ * @see {@link subscribe}
+ *
+ * @param {Observer|function} [nextOrObserver] A normal Observer object or a
+ * callback for `next`.
+ * @param {function} [error] Callback for errors in the source.
+ * @param {function} [complete] Callback for the completion of the source.
+ * @return {Observable} An Observable identical to the source, but runs the
+ * specified Observer or callback(s) for each item.
+ * @method do
+ * @name do
+ * @owner Observable
+ */
+function _do(nextOrObserver, error, complete) {
+    return this.lift(new DoOperator(nextOrObserver, error, complete));
+}
+exports._do = _do;
+var DoOperator = (function () {
+    function DoOperator(nextOrObserver, error, complete) {
+        this.nextOrObserver = nextOrObserver;
+        this.error = error;
+        this.complete = complete;
+    }
+    DoOperator.prototype.call = function (subscriber, source) {
+        return source.subscribe(new DoSubscriber(subscriber, this.nextOrObserver, this.error, this.complete));
+    };
+    return DoOperator;
+}());
+/**
+ * We need this JSDoc comment for affecting ESDoc.
+ * @ignore
+ * @extends {Ignored}
+ */
+var DoSubscriber = (function (_super) {
+    __extends(DoSubscriber, _super);
+    function DoSubscriber(destination, nextOrObserver, error, complete) {
+        _super.call(this, destination);
+        var safeSubscriber = new Subscriber_1.Subscriber(nextOrObserver, error, complete);
+        safeSubscriber.syncErrorThrowable = true;
+        this.add(safeSubscriber);
+        this.safeSubscriber = safeSubscriber;
+    }
+    DoSubscriber.prototype._next = function (value) {
+        var safeSubscriber = this.safeSubscriber;
+        safeSubscriber.next(value);
+        if (safeSubscriber.syncErrorThrown) {
+            this.destination.error(safeSubscriber.syncErrorValue);
+        }
+        else {
+            this.destination.next(value);
+        }
+    };
+    DoSubscriber.prototype._error = function (err) {
+        var safeSubscriber = this.safeSubscriber;
+        safeSubscriber.error(err);
+        if (safeSubscriber.syncErrorThrown) {
+            this.destination.error(safeSubscriber.syncErrorValue);
+        }
+        else {
+            this.destination.error(err);
+        }
+    };
+    DoSubscriber.prototype._complete = function () {
+        var safeSubscriber = this.safeSubscriber;
+        safeSubscriber.complete();
+        if (safeSubscriber.syncErrorThrown) {
+            this.destination.error(safeSubscriber.syncErrorValue);
+        }
+        else {
+            this.destination.complete();
+        }
+    };
+    return DoSubscriber;
+}(Subscriber_1.Subscriber));
+//# sourceMappingURL=do.js.map
+
+/***/ }),
+
 /***/ "../../../../rxjs/operator/every.js":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23835,6 +24719,56 @@ var FilterSubscriber = (function (_super) {
     return FilterSubscriber;
 }(Subscriber_1.Subscriber));
 //# sourceMappingURL=filter.js.map
+
+/***/ }),
+
+/***/ "../../../../rxjs/operator/finally.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var Subscriber_1 = __webpack_require__("../../../../rxjs/Subscriber.js");
+var Subscription_1 = __webpack_require__("../../../../rxjs/Subscription.js");
+/**
+ * Returns an Observable that mirrors the source Observable, but will call a specified function when
+ * the source terminates on complete or error.
+ * @param {function} callback Function to be called when source terminates.
+ * @return {Observable} An Observable that mirrors the source, but will call the specified function on termination.
+ * @method finally
+ * @owner Observable
+ */
+function _finally(callback) {
+    return this.lift(new FinallyOperator(callback));
+}
+exports._finally = _finally;
+var FinallyOperator = (function () {
+    function FinallyOperator(callback) {
+        this.callback = callback;
+    }
+    FinallyOperator.prototype.call = function (subscriber, source) {
+        return source.subscribe(new FinallySubscriber(subscriber, this.callback));
+    };
+    return FinallyOperator;
+}());
+/**
+ * We need this JSDoc comment for affecting ESDoc.
+ * @ignore
+ * @extends {Ignored}
+ */
+var FinallySubscriber = (function (_super) {
+    __extends(FinallySubscriber, _super);
+    function FinallySubscriber(destination, callback) {
+        _super.call(this, destination);
+        this.add(new Subscription_1.Subscription(callback));
+    }
+    return FinallySubscriber;
+}(Subscriber_1.Subscriber));
+//# sourceMappingURL=finally.js.map
 
 /***/ }),
 
@@ -25013,6 +25947,564 @@ exports.share = share;
 
 /***/ }),
 
+/***/ "../../../../rxjs/operator/switchMap.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var OuterSubscriber_1 = __webpack_require__("../../../../rxjs/OuterSubscriber.js");
+var subscribeToResult_1 = __webpack_require__("../../../../rxjs/util/subscribeToResult.js");
+/* tslint:enable:max-line-length */
+/**
+ * Projects each source value to an Observable which is merged in the output
+ * Observable, emitting values only from the most recently projected Observable.
+ *
+ * <span class="informal">Maps each value to an Observable, then flattens all of
+ * these inner Observables using {@link switch}.</span>
+ *
+ * <img src="./img/switchMap.png" width="100%">
+ *
+ * Returns an Observable that emits items based on applying a function that you
+ * supply to each item emitted by the source Observable, where that function
+ * returns an (so-called "inner") Observable. Each time it observes one of these
+ * inner Observables, the output Observable begins emitting the items emitted by
+ * that inner Observable. When a new inner Observable is emitted, `switchMap`
+ * stops emitting items from the earlier-emitted inner Observable and begins
+ * emitting items from the new one. It continues to behave like this for
+ * subsequent inner Observables.
+ *
+ * @example <caption>Rerun an interval Observable on every click event</caption>
+ * var clicks = Rx.Observable.fromEvent(document, 'click');
+ * var result = clicks.switchMap((ev) => Rx.Observable.interval(1000));
+ * result.subscribe(x => console.log(x));
+ *
+ * @see {@link concatMap}
+ * @see {@link exhaustMap}
+ * @see {@link mergeMap}
+ * @see {@link switch}
+ * @see {@link switchMapTo}
+ *
+ * @param {function(value: T, ?index: number): ObservableInput} project A function
+ * that, when applied to an item emitted by the source Observable, returns an
+ * Observable.
+ * @param {function(outerValue: T, innerValue: I, outerIndex: number, innerIndex: number): any} [resultSelector]
+ * A function to produce the value on the output Observable based on the values
+ * and the indices of the source (outer) emission and the inner Observable
+ * emission. The arguments passed to this function are:
+ * - `outerValue`: the value that came from the source
+ * - `innerValue`: the value that came from the projected Observable
+ * - `outerIndex`: the "index" of the value that came from the source
+ * - `innerIndex`: the "index" of the value from the projected Observable
+ * @return {Observable} An Observable that emits the result of applying the
+ * projection function (and the optional `resultSelector`) to each item emitted
+ * by the source Observable and taking only the values from the most recently
+ * projected inner Observable.
+ * @method switchMap
+ * @owner Observable
+ */
+function switchMap(project, resultSelector) {
+    return this.lift(new SwitchMapOperator(project, resultSelector));
+}
+exports.switchMap = switchMap;
+var SwitchMapOperator = (function () {
+    function SwitchMapOperator(project, resultSelector) {
+        this.project = project;
+        this.resultSelector = resultSelector;
+    }
+    SwitchMapOperator.prototype.call = function (subscriber, source) {
+        return source.subscribe(new SwitchMapSubscriber(subscriber, this.project, this.resultSelector));
+    };
+    return SwitchMapOperator;
+}());
+/**
+ * We need this JSDoc comment for affecting ESDoc.
+ * @ignore
+ * @extends {Ignored}
+ */
+var SwitchMapSubscriber = (function (_super) {
+    __extends(SwitchMapSubscriber, _super);
+    function SwitchMapSubscriber(destination, project, resultSelector) {
+        _super.call(this, destination);
+        this.project = project;
+        this.resultSelector = resultSelector;
+        this.index = 0;
+    }
+    SwitchMapSubscriber.prototype._next = function (value) {
+        var result;
+        var index = this.index++;
+        try {
+            result = this.project(value, index);
+        }
+        catch (error) {
+            this.destination.error(error);
+            return;
+        }
+        this._innerSub(result, value, index);
+    };
+    SwitchMapSubscriber.prototype._innerSub = function (result, value, index) {
+        var innerSubscription = this.innerSubscription;
+        if (innerSubscription) {
+            innerSubscription.unsubscribe();
+        }
+        this.add(this.innerSubscription = subscribeToResult_1.subscribeToResult(this, result, value, index));
+    };
+    SwitchMapSubscriber.prototype._complete = function () {
+        var innerSubscription = this.innerSubscription;
+        if (!innerSubscription || innerSubscription.closed) {
+            _super.prototype._complete.call(this);
+        }
+    };
+    SwitchMapSubscriber.prototype._unsubscribe = function () {
+        this.innerSubscription = null;
+    };
+    SwitchMapSubscriber.prototype.notifyComplete = function (innerSub) {
+        this.remove(innerSub);
+        this.innerSubscription = null;
+        if (this.isStopped) {
+            _super.prototype._complete.call(this);
+        }
+    };
+    SwitchMapSubscriber.prototype.notifyNext = function (outerValue, innerValue, outerIndex, innerIndex, innerSub) {
+        if (this.resultSelector) {
+            this._tryNotifyNext(outerValue, innerValue, outerIndex, innerIndex);
+        }
+        else {
+            this.destination.next(innerValue);
+        }
+    };
+    SwitchMapSubscriber.prototype._tryNotifyNext = function (outerValue, innerValue, outerIndex, innerIndex) {
+        var result;
+        try {
+            result = this.resultSelector(outerValue, innerValue, outerIndex, innerIndex);
+        }
+        catch (err) {
+            this.destination.error(err);
+            return;
+        }
+        this.destination.next(result);
+    };
+    return SwitchMapSubscriber;
+}(OuterSubscriber_1.OuterSubscriber));
+//# sourceMappingURL=switchMap.js.map
+
+/***/ }),
+
+/***/ "../../../../rxjs/operator/takeWhile.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var Subscriber_1 = __webpack_require__("../../../../rxjs/Subscriber.js");
+/**
+ * Emits values emitted by the source Observable so long as each value satisfies
+ * the given `predicate`, and then completes as soon as this `predicate` is not
+ * satisfied.
+ *
+ * <span class="informal">Takes values from the source only while they pass the
+ * condition given. When the first value does not satisfy, it completes.</span>
+ *
+ * <img src="./img/takeWhile.png" width="100%">
+ *
+ * `takeWhile` subscribes and begins mirroring the source Observable. Each value
+ * emitted on the source is given to the `predicate` function which returns a
+ * boolean, representing a condition to be satisfied by the source values. The
+ * output Observable emits the source values until such time as the `predicate`
+ * returns false, at which point `takeWhile` stops mirroring the source
+ * Observable and completes the output Observable.
+ *
+ * @example <caption>Emit click events only while the clientX property is greater than 200</caption>
+ * var clicks = Rx.Observable.fromEvent(document, 'click');
+ * var result = clicks.takeWhile(ev => ev.clientX > 200);
+ * result.subscribe(x => console.log(x));
+ *
+ * @see {@link take}
+ * @see {@link takeLast}
+ * @see {@link takeUntil}
+ * @see {@link skip}
+ *
+ * @param {function(value: T, index: number): boolean} predicate A function that
+ * evaluates a value emitted by the source Observable and returns a boolean.
+ * Also takes the (zero-based) index as the second argument.
+ * @return {Observable<T>} An Observable that emits the values from the source
+ * Observable so long as each value satisfies the condition defined by the
+ * `predicate`, then completes.
+ * @method takeWhile
+ * @owner Observable
+ */
+function takeWhile(predicate) {
+    return this.lift(new TakeWhileOperator(predicate));
+}
+exports.takeWhile = takeWhile;
+var TakeWhileOperator = (function () {
+    function TakeWhileOperator(predicate) {
+        this.predicate = predicate;
+    }
+    TakeWhileOperator.prototype.call = function (subscriber, source) {
+        return source.subscribe(new TakeWhileSubscriber(subscriber, this.predicate));
+    };
+    return TakeWhileOperator;
+}());
+/**
+ * We need this JSDoc comment for affecting ESDoc.
+ * @ignore
+ * @extends {Ignored}
+ */
+var TakeWhileSubscriber = (function (_super) {
+    __extends(TakeWhileSubscriber, _super);
+    function TakeWhileSubscriber(destination, predicate) {
+        _super.call(this, destination);
+        this.predicate = predicate;
+        this.index = 0;
+    }
+    TakeWhileSubscriber.prototype._next = function (value) {
+        var destination = this.destination;
+        var result;
+        try {
+            result = this.predicate(value, this.index++);
+        }
+        catch (err) {
+            destination.error(err);
+            return;
+        }
+        this.nextOrComplete(value, result);
+    };
+    TakeWhileSubscriber.prototype.nextOrComplete = function (value, predicateResult) {
+        var destination = this.destination;
+        if (Boolean(predicateResult)) {
+            destination.next(value);
+        }
+        else {
+            destination.complete();
+        }
+    };
+    return TakeWhileSubscriber;
+}(Subscriber_1.Subscriber));
+//# sourceMappingURL=takeWhile.js.map
+
+/***/ }),
+
+/***/ "../../../../rxjs/scheduler/Action.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var Subscription_1 = __webpack_require__("../../../../rxjs/Subscription.js");
+/**
+ * A unit of work to be executed in a {@link Scheduler}. An action is typically
+ * created from within a Scheduler and an RxJS user does not need to concern
+ * themselves about creating and manipulating an Action.
+ *
+ * ```ts
+ * class Action<T> extends Subscription {
+ *   new (scheduler: Scheduler, work: (state?: T) => void);
+ *   schedule(state?: T, delay: number = 0): Subscription;
+ * }
+ * ```
+ *
+ * @class Action<T>
+ */
+var Action = (function (_super) {
+    __extends(Action, _super);
+    function Action(scheduler, work) {
+        _super.call(this);
+    }
+    /**
+     * Schedules this action on its parent Scheduler for execution. May be passed
+     * some context object, `state`. May happen at some point in the future,
+     * according to the `delay` parameter, if specified.
+     * @param {T} [state] Some contextual data that the `work` function uses when
+     * called by the Scheduler.
+     * @param {number} [delay] Time to wait before executing the work, where the
+     * time unit is implicit and defined by the Scheduler.
+     * @return {void}
+     */
+    Action.prototype.schedule = function (state, delay) {
+        if (delay === void 0) { delay = 0; }
+        return this;
+    };
+    return Action;
+}(Subscription_1.Subscription));
+exports.Action = Action;
+//# sourceMappingURL=Action.js.map
+
+/***/ }),
+
+/***/ "../../../../rxjs/scheduler/AsyncAction.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var root_1 = __webpack_require__("../../../../rxjs/util/root.js");
+var Action_1 = __webpack_require__("../../../../rxjs/scheduler/Action.js");
+/**
+ * We need this JSDoc comment for affecting ESDoc.
+ * @ignore
+ * @extends {Ignored}
+ */
+var AsyncAction = (function (_super) {
+    __extends(AsyncAction, _super);
+    function AsyncAction(scheduler, work) {
+        _super.call(this, scheduler, work);
+        this.scheduler = scheduler;
+        this.work = work;
+        this.pending = false;
+    }
+    AsyncAction.prototype.schedule = function (state, delay) {
+        if (delay === void 0) { delay = 0; }
+        if (this.closed) {
+            return this;
+        }
+        // Always replace the current state with the new state.
+        this.state = state;
+        // Set the pending flag indicating that this action has been scheduled, or
+        // has recursively rescheduled itself.
+        this.pending = true;
+        var id = this.id;
+        var scheduler = this.scheduler;
+        //
+        // Important implementation note:
+        //
+        // Actions only execute once by default, unless rescheduled from within the
+        // scheduled callback. This allows us to implement single and repeat
+        // actions via the same code path, without adding API surface area, as well
+        // as mimic traditional recursion but across asynchronous boundaries.
+        //
+        // However, JS runtimes and timers distinguish between intervals achieved by
+        // serial `setTimeout` calls vs. a single `setInterval` call. An interval of
+        // serial `setTimeout` calls can be individually delayed, which delays
+        // scheduling the next `setTimeout`, and so on. `setInterval` attempts to
+        // guarantee the interval callback will be invoked more precisely to the
+        // interval period, regardless of load.
+        //
+        // Therefore, we use `setInterval` to schedule single and repeat actions.
+        // If the action reschedules itself with the same delay, the interval is not
+        // canceled. If the action doesn't reschedule, or reschedules with a
+        // different delay, the interval will be canceled after scheduled callback
+        // execution.
+        //
+        if (id != null) {
+            this.id = this.recycleAsyncId(scheduler, id, delay);
+        }
+        this.delay = delay;
+        // If this action has already an async Id, don't request a new one.
+        this.id = this.id || this.requestAsyncId(scheduler, this.id, delay);
+        return this;
+    };
+    AsyncAction.prototype.requestAsyncId = function (scheduler, id, delay) {
+        if (delay === void 0) { delay = 0; }
+        return root_1.root.setInterval(scheduler.flush.bind(scheduler, this), delay);
+    };
+    AsyncAction.prototype.recycleAsyncId = function (scheduler, id, delay) {
+        if (delay === void 0) { delay = 0; }
+        // If this action is rescheduled with the same delay time, don't clear the interval id.
+        if (delay !== null && this.delay === delay && this.pending === false) {
+            return id;
+        }
+        // Otherwise, if the action's delay time is different from the current delay,
+        // or the action has been rescheduled before it's executed, clear the interval id
+        return root_1.root.clearInterval(id) && undefined || undefined;
+    };
+    /**
+     * Immediately executes this action and the `work` it contains.
+     * @return {any}
+     */
+    AsyncAction.prototype.execute = function (state, delay) {
+        if (this.closed) {
+            return new Error('executing a cancelled action');
+        }
+        this.pending = false;
+        var error = this._execute(state, delay);
+        if (error) {
+            return error;
+        }
+        else if (this.pending === false && this.id != null) {
+            // Dequeue if the action didn't reschedule itself. Don't call
+            // unsubscribe(), because the action could reschedule later.
+            // For example:
+            // ```
+            // scheduler.schedule(function doWork(counter) {
+            //   /* ... I'm a busy worker bee ... */
+            //   var originalAction = this;
+            //   /* wait 100ms before rescheduling the action */
+            //   setTimeout(function () {
+            //     originalAction.schedule(counter + 1);
+            //   }, 100);
+            // }, 1000);
+            // ```
+            this.id = this.recycleAsyncId(this.scheduler, this.id, null);
+        }
+    };
+    AsyncAction.prototype._execute = function (state, delay) {
+        var errored = false;
+        var errorValue = undefined;
+        try {
+            this.work(state);
+        }
+        catch (e) {
+            errored = true;
+            errorValue = !!e && e || new Error(e);
+        }
+        if (errored) {
+            this.unsubscribe();
+            return errorValue;
+        }
+    };
+    AsyncAction.prototype._unsubscribe = function () {
+        var id = this.id;
+        var scheduler = this.scheduler;
+        var actions = scheduler.actions;
+        var index = actions.indexOf(this);
+        this.work = null;
+        this.state = null;
+        this.pending = false;
+        this.scheduler = null;
+        if (index !== -1) {
+            actions.splice(index, 1);
+        }
+        if (id != null) {
+            this.id = this.recycleAsyncId(scheduler, id, null);
+        }
+        this.delay = null;
+    };
+    return AsyncAction;
+}(Action_1.Action));
+exports.AsyncAction = AsyncAction;
+//# sourceMappingURL=AsyncAction.js.map
+
+/***/ }),
+
+/***/ "../../../../rxjs/scheduler/AsyncScheduler.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var Scheduler_1 = __webpack_require__("../../../../rxjs/Scheduler.js");
+var AsyncScheduler = (function (_super) {
+    __extends(AsyncScheduler, _super);
+    function AsyncScheduler() {
+        _super.apply(this, arguments);
+        this.actions = [];
+        /**
+         * A flag to indicate whether the Scheduler is currently executing a batch of
+         * queued actions.
+         * @type {boolean}
+         */
+        this.active = false;
+        /**
+         * An internal ID used to track the latest asynchronous task such as those
+         * coming from `setTimeout`, `setInterval`, `requestAnimationFrame`, and
+         * others.
+         * @type {any}
+         */
+        this.scheduled = undefined;
+    }
+    AsyncScheduler.prototype.flush = function (action) {
+        var actions = this.actions;
+        if (this.active) {
+            actions.push(action);
+            return;
+        }
+        var error;
+        this.active = true;
+        do {
+            if (error = action.execute(action.state, action.delay)) {
+                break;
+            }
+        } while (action = actions.shift()); // exhaust the scheduler queue
+        this.active = false;
+        if (error) {
+            while (action = actions.shift()) {
+                action.unsubscribe();
+            }
+            throw error;
+        }
+    };
+    return AsyncScheduler;
+}(Scheduler_1.Scheduler));
+exports.AsyncScheduler = AsyncScheduler;
+//# sourceMappingURL=AsyncScheduler.js.map
+
+/***/ }),
+
+/***/ "../../../../rxjs/scheduler/async.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var AsyncAction_1 = __webpack_require__("../../../../rxjs/scheduler/AsyncAction.js");
+var AsyncScheduler_1 = __webpack_require__("../../../../rxjs/scheduler/AsyncScheduler.js");
+/**
+ *
+ * Async Scheduler
+ *
+ * <span class="informal">Schedule task as if you used setTimeout(task, duration)</span>
+ *
+ * `async` scheduler schedules tasks asynchronously, by putting them on the JavaScript
+ * event loop queue. It is best used to delay tasks in time or to schedule tasks repeating
+ * in intervals.
+ *
+ * If you just want to "defer" task, that is to perform it right after currently
+ * executing synchronous code ends (commonly achieved by `setTimeout(deferredTask, 0)`),
+ * better choice will be the {@link asap} scheduler.
+ *
+ * @example <caption>Use async scheduler to delay task</caption>
+ * const task = () => console.log('it works!');
+ *
+ * Rx.Scheduler.async.schedule(task, 2000);
+ *
+ * // After 2 seconds logs:
+ * // "it works!"
+ *
+ *
+ * @example <caption>Use async scheduler to repeat task in intervals</caption>
+ * function task(state) {
+ *   console.log(state);
+ *   this.schedule(state + 1, 1000); // `this` references currently executing Action,
+ *                                   // which we reschedule with new state and delay
+ * }
+ *
+ * Rx.Scheduler.async.schedule(task, 3000, 0);
+ *
+ * // Logs:
+ * // 0 after 3s
+ * // 1 after 4s
+ * // 2 after 5s
+ * // 3 after 6s
+ *
+ * @static true
+ * @name async
+ * @owner Scheduler
+ */
+exports.async = new AsyncScheduler_1.AsyncScheduler(AsyncAction_1.AsyncAction);
+//# sourceMappingURL=async.js.map
+
+/***/ }),
+
 /***/ "../../../../rxjs/symbol/iterator.js":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -25240,6 +26732,19 @@ exports.isArrayLike = (function (x) { return x && typeof x.length === 'number'; 
 
 /***/ }),
 
+/***/ "../../../../rxjs/util/isDate.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+function isDate(value) {
+    return value instanceof Date && !isNaN(+value);
+}
+exports.isDate = isDate;
+//# sourceMappingURL=isDate.js.map
+
+/***/ }),
+
 /***/ "../../../../rxjs/util/isFunction.js":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -25250,6 +26755,25 @@ function isFunction(x) {
 }
 exports.isFunction = isFunction;
 //# sourceMappingURL=isFunction.js.map
+
+/***/ }),
+
+/***/ "../../../../rxjs/util/isNumeric.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var isArray_1 = __webpack_require__("../../../../rxjs/util/isArray.js");
+function isNumeric(val) {
+    // parseFloat NaNs numeric-cast false positives (null|true|false|"")
+    // ...but misinterprets leading-number strings, particularly hex literals ("0x...")
+    // subtraction forces infinities to NaN
+    // adding 1 corrects loss of precision from parseFloat (#15100)
+    return !isArray_1.isArray(val) && (val - parseFloat(val) + 1) >= 0;
+}
+exports.isNumeric = isNumeric;
+;
+//# sourceMappingURL=isNumeric.js.map
 
 /***/ }),
 

@@ -34,7 +34,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-navbar></app-navbar>\n<div class=\"container\">\n  <flash-messages></flash-messages>\n  <router-outlet></router-outlet>\n</div>"
+module.exports = "<app-navbar></app-navbar>\n<ng-progress\n  [positionUsing]=\"'marginLeft'\" \n  [minimum]=\"0.15\" \n  [maximum]=\"1\"\n  [speed]=\"200\" \n  [direction]=\"'rightToLeftIncreased'\"\n  [color]=\"'red'\" \n  [trickleSpeed]=\"250\" \n  [thick]=\"true\" \n  [ease]=\"'easeInSine'\"\n></ng-progress>\n<div class=\"container\">\n  <flash-messages></flash-messages>\n  <router-outlet></router-outlet>\n</div>"
 
 /***/ }),
 
@@ -93,51 +93,52 @@ var _a, _b;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_angular2_flash_messages__ = __webpack_require__("../../../../angular2-flash-messages/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_angular2_flash_messages___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_angular2_flash_messages__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_product_add_productAdd_directive__ = __webpack_require__("../../../../../src/app/components/product-add/productAdd.directive.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_coupon_add_coupon_add_directive__ = __webpack_require__("../../../../../src/app/components/coupon-add/coupon-add.directive.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_primeng_primeng__ = __webpack_require__("../../../../primeng/primeng.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_primeng_primeng___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_primeng_primeng__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__services_auth_service__ = __webpack_require__("../../../../../src/app/services/auth.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__services_local_storage_service__ = __webpack_require__("../../../../../src/app/services/local-storage.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__services_http_service__ = __webpack_require__("../../../../../src/app/services/http.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__services_client_service__ = __webpack_require__("../../../../../src/app/services/client.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__services_product_service__ = __webpack_require__("../../../../../src/app/services/product.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__services_order_service__ = __webpack_require__("../../../../../src/app/services/order.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__services_cart_service__ = __webpack_require__("../../../../../src/app/services/cart.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__services_coupon_service__ = __webpack_require__("../../../../../src/app/services/coupon.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__services_vendor_order_service__ = __webpack_require__("../../../../../src/app/services/vendor-order.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__services_activity_service__ = __webpack_require__("../../../../../src/app/services/activity.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__guards_auth_guard__ = __webpack_require__("../../../../../src/app/guards/auth.guard.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__guards_admin_guard__ = __webpack_require__("../../../../../src/app/guards/admin.guard.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__guards_login_guard__ = __webpack_require__("../../../../../src/app/guards/login.guard.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__app_component__ = __webpack_require__("../../../../../src/app/app.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__components_login_login_component__ = __webpack_require__("../../../../../src/app/components/login/login.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__components_register_register_component__ = __webpack_require__("../../../../../src/app/components/register/register.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__components_dashboard_dashboard_component__ = __webpack_require__("../../../../../src/app/components/dashboard/dashboard.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__components_product_sale_product_sale_component__ = __webpack_require__("../../../../../src/app/components/product-sale/product-sale.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__components_products_products_component__ = __webpack_require__("../../../../../src/app/components/products/products.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__components_product_detail_product_detail_component__ = __webpack_require__("../../../../../src/app/components/product-detail/product-detail.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__components_product_add_product_add_component__ = __webpack_require__("../../../../../src/app/components/product-add/product-add.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__components_clients_clients_component__ = __webpack_require__("../../../../../src/app/components/clients/clients.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__components_client_detail_client_detail_component__ = __webpack_require__("../../../../../src/app/components/client-detail/client-detail.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__components_client_add_client_add_component__ = __webpack_require__("../../../../../src/app/components/client-add/client-add.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__components_client_edit_client_edit_component__ = __webpack_require__("../../../../../src/app/components/client-edit/client-edit.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__components_product_edit_product_edit_component__ = __webpack_require__("../../../../../src/app/components/product-edit/product-edit.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__components_sidebar_sidebar_component__ = __webpack_require__("../../../../../src/app/components/sidebar/sidebar.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__components_cart_cart_component__ = __webpack_require__("../../../../../src/app/components/cart/cart.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__components_client_orders_client_orders_component__ = __webpack_require__("../../../../../src/app/components/client-orders/client-orders.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__components_client_order_detail_client_order_detail_component__ = __webpack_require__("../../../../../src/app/components/client-order-detail/client-order-detail.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__components_vendor_orders_vendor_orders_component__ = __webpack_require__("../../../../../src/app/components/vendor-orders/vendor-orders.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__components_vendor_order_detail_vendor_order_detail_component__ = __webpack_require__("../../../../../src/app/components/vendor-order-detail/vendor-order-detail.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_42__components_page_not_found_page_not_found_component__ = __webpack_require__("../../../../../src/app/components/page-not-found/page-not-found.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_43__components_home_home_component__ = __webpack_require__("../../../../../src/app/components/home/home.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_44__components_navbar_navbar_component__ = __webpack_require__("../../../../../src/app/components/navbar/navbar.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_45__components_footer_footer_component__ = __webpack_require__("../../../../../src/app/components/footer/footer.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_46__components_coupon_coupon_component__ = __webpack_require__("../../../../../src/app/components/coupon/coupon.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_47__components_coupon_detail_coupon_detail_component__ = __webpack_require__("../../../../../src/app/components/coupon-detail/coupon-detail.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_48__components_coupon_add_coupon_add_component__ = __webpack_require__("../../../../../src/app/components/coupon-add/coupon-add.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ngx_progressbar__ = __webpack_require__("../../../../ngx-progressbar/modules/ngx-progressbar.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angular2_flash_messages__ = __webpack_require__("../../../../angular2-flash-messages/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angular2_flash_messages___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_angular2_flash_messages__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_product_add_productAdd_directive__ = __webpack_require__("../../../../../src/app/components/product-add/productAdd.directive.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_coupon_add_coupon_add_directive__ = __webpack_require__("../../../../../src/app/components/coupon-add/coupon-add.directive.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_primeng_primeng__ = __webpack_require__("../../../../primeng/primeng.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_primeng_primeng___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10_primeng_primeng__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__services_auth_service__ = __webpack_require__("../../../../../src/app/services/auth.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__services_local_storage_service__ = __webpack_require__("../../../../../src/app/services/local-storage.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__services_http_service__ = __webpack_require__("../../../../../src/app/services/http.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__services_client_service__ = __webpack_require__("../../../../../src/app/services/client.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__services_product_service__ = __webpack_require__("../../../../../src/app/services/product.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__services_order_service__ = __webpack_require__("../../../../../src/app/services/order.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__services_cart_service__ = __webpack_require__("../../../../../src/app/services/cart.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__services_coupon_service__ = __webpack_require__("../../../../../src/app/services/coupon.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__services_vendor_order_service__ = __webpack_require__("../../../../../src/app/services/vendor-order.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__services_activity_service__ = __webpack_require__("../../../../../src/app/services/activity.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__guards_auth_guard__ = __webpack_require__("../../../../../src/app/guards/auth.guard.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__guards_admin_guard__ = __webpack_require__("../../../../../src/app/guards/admin.guard.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__guards_login_guard__ = __webpack_require__("../../../../../src/app/guards/login.guard.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__app_component__ = __webpack_require__("../../../../../src/app/app.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__components_login_login_component__ = __webpack_require__("../../../../../src/app/components/login/login.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__components_register_register_component__ = __webpack_require__("../../../../../src/app/components/register/register.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__components_dashboard_dashboard_component__ = __webpack_require__("../../../../../src/app/components/dashboard/dashboard.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__components_product_sale_product_sale_component__ = __webpack_require__("../../../../../src/app/components/product-sale/product-sale.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__components_products_products_component__ = __webpack_require__("../../../../../src/app/components/products/products.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__components_product_detail_product_detail_component__ = __webpack_require__("../../../../../src/app/components/product-detail/product-detail.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__components_product_add_product_add_component__ = __webpack_require__("../../../../../src/app/components/product-add/product-add.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__components_clients_clients_component__ = __webpack_require__("../../../../../src/app/components/clients/clients.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__components_client_detail_client_detail_component__ = __webpack_require__("../../../../../src/app/components/client-detail/client-detail.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__components_client_add_client_add_component__ = __webpack_require__("../../../../../src/app/components/client-add/client-add.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__components_client_edit_client_edit_component__ = __webpack_require__("../../../../../src/app/components/client-edit/client-edit.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__components_product_edit_product_edit_component__ = __webpack_require__("../../../../../src/app/components/product-edit/product-edit.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__components_sidebar_sidebar_component__ = __webpack_require__("../../../../../src/app/components/sidebar/sidebar.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__components_cart_cart_component__ = __webpack_require__("../../../../../src/app/components/cart/cart.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__components_client_orders_client_orders_component__ = __webpack_require__("../../../../../src/app/components/client-orders/client-orders.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__components_client_order_detail_client_order_detail_component__ = __webpack_require__("../../../../../src/app/components/client-order-detail/client-order-detail.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__components_vendor_orders_vendor_orders_component__ = __webpack_require__("../../../../../src/app/components/vendor-orders/vendor-orders.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_42__components_vendor_order_detail_vendor_order_detail_component__ = __webpack_require__("../../../../../src/app/components/vendor-order-detail/vendor-order-detail.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_43__components_page_not_found_page_not_found_component__ = __webpack_require__("../../../../../src/app/components/page-not-found/page-not-found.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_44__components_home_home_component__ = __webpack_require__("../../../../../src/app/components/home/home.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_45__components_navbar_navbar_component__ = __webpack_require__("../../../../../src/app/components/navbar/navbar.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_46__components_footer_footer_component__ = __webpack_require__("../../../../../src/app/components/footer/footer.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_47__components_coupon_coupon_component__ = __webpack_require__("../../../../../src/app/components/coupon/coupon.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_48__components_coupon_detail_coupon_detail_component__ = __webpack_require__("../../../../../src/app/components/coupon-detail/coupon-detail.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_49__components_coupon_add_coupon_add_component__ = __webpack_require__("../../../../../src/app/components/coupon-add/coupon-add.component.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -146,6 +147,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 //Cores
+
 
 
 
@@ -200,28 +202,28 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 var appRoutes = [
-    { path: '', component: __WEBPACK_IMPORTED_MODULE_43__components_home_home_component__["a" /* HomeComponent */] },
-    { path: 'login', component: __WEBPACK_IMPORTED_MODULE_24__components_login_login_component__["a" /* LoginComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_22__guards_login_guard__["a" /* LoginGuard */]] },
-    { path: 'register', component: __WEBPACK_IMPORTED_MODULE_25__components_register_register_component__["a" /* RegisterComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_22__guards_login_guard__["a" /* LoginGuard */]] },
-    { path: 'dashboard/:role/:id', component: __WEBPACK_IMPORTED_MODULE_26__components_dashboard_dashboard_component__["a" /* DashboardComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_20__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'clients', component: __WEBPACK_IMPORTED_MODULE_31__components_clients_clients_component__["a" /* ClientsComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_20__guards_auth_guard__["a" /* AuthGuard */], __WEBPACK_IMPORTED_MODULE_21__guards_admin_guard__["a" /* AdminGuard */]] },
-    { path: 'client-detail/:id', component: __WEBPACK_IMPORTED_MODULE_32__components_client_detail_client_detail_component__["a" /* ClientDetailComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_20__guards_auth_guard__["a" /* AuthGuard */], __WEBPACK_IMPORTED_MODULE_21__guards_admin_guard__["a" /* AdminGuard */]] },
-    { path: 'add-client', component: __WEBPACK_IMPORTED_MODULE_33__components_client_add_client_add_component__["a" /* ClientAddComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_20__guards_auth_guard__["a" /* AuthGuard */], __WEBPACK_IMPORTED_MODULE_21__guards_admin_guard__["a" /* AdminGuard */]] },
-    { path: 'edit-client/:id', component: __WEBPACK_IMPORTED_MODULE_34__components_client_edit_client_edit_component__["a" /* ClientEditComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_20__guards_auth_guard__["a" /* AuthGuard */], __WEBPACK_IMPORTED_MODULE_21__guards_admin_guard__["a" /* AdminGuard */]] },
-    { path: 'cart/:role/:id', component: __WEBPACK_IMPORTED_MODULE_37__components_cart_cart_component__["a" /* CartComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_20__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'sale/:role', component: __WEBPACK_IMPORTED_MODULE_27__components_product_sale_product_sale_component__["a" /* ProductSaleComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_20__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'products', component: __WEBPACK_IMPORTED_MODULE_28__components_products_products_component__["a" /* ProductsComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_20__guards_auth_guard__["a" /* AuthGuard */], __WEBPACK_IMPORTED_MODULE_21__guards_admin_guard__["a" /* AdminGuard */]] },
-    { path: 'product-detail/:id', component: __WEBPACK_IMPORTED_MODULE_29__components_product_detail_product_detail_component__["a" /* ProductDetailComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_20__guards_auth_guard__["a" /* AuthGuard */], __WEBPACK_IMPORTED_MODULE_21__guards_admin_guard__["a" /* AdminGuard */]] },
-    { path: 'add-product', component: __WEBPACK_IMPORTED_MODULE_30__components_product_add_product_add_component__["a" /* ProductAddComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_20__guards_auth_guard__["a" /* AuthGuard */], __WEBPACK_IMPORTED_MODULE_21__guards_admin_guard__["a" /* AdminGuard */]] },
-    { path: 'edit-product/:id', component: __WEBPACK_IMPORTED_MODULE_35__components_product_edit_product_edit_component__["a" /* ProductEditComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_20__guards_auth_guard__["a" /* AuthGuard */], __WEBPACK_IMPORTED_MODULE_21__guards_admin_guard__["a" /* AdminGuard */]] },
-    { path: 'client-orders', component: __WEBPACK_IMPORTED_MODULE_38__components_client_orders_client_orders_component__["a" /* ClientOrdersComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_20__guards_auth_guard__["a" /* AuthGuard */], __WEBPACK_IMPORTED_MODULE_21__guards_admin_guard__["a" /* AdminGuard */]] },
-    { path: 'vendor-orders', component: __WEBPACK_IMPORTED_MODULE_40__components_vendor_orders_vendor_orders_component__["a" /* VendorOrdersComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_20__guards_auth_guard__["a" /* AuthGuard */], __WEBPACK_IMPORTED_MODULE_21__guards_admin_guard__["a" /* AdminGuard */]] },
-    { path: 'vendor-order-detail/:id', component: __WEBPACK_IMPORTED_MODULE_41__components_vendor_order_detail_vendor_order_detail_component__["a" /* VendorOrderDetailComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_20__guards_auth_guard__["a" /* AuthGuard */], __WEBPACK_IMPORTED_MODULE_21__guards_admin_guard__["a" /* AdminGuard */]] },
-    { path: 'client-order-detail/:role/:id', component: __WEBPACK_IMPORTED_MODULE_39__components_client_order_detail_client_order_detail_component__["a" /* ClientOrderDetailComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_20__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'coupons', component: __WEBPACK_IMPORTED_MODULE_46__components_coupon_coupon_component__["a" /* CouponComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_20__guards_auth_guard__["a" /* AuthGuard */], __WEBPACK_IMPORTED_MODULE_21__guards_admin_guard__["a" /* AdminGuard */]] },
-    { path: 'add-coupon', component: __WEBPACK_IMPORTED_MODULE_48__components_coupon_add_coupon_add_component__["a" /* CouponAddComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_20__guards_auth_guard__["a" /* AuthGuard */], __WEBPACK_IMPORTED_MODULE_21__guards_admin_guard__["a" /* AdminGuard */]] },
-    { path: 'coupon/:id', component: __WEBPACK_IMPORTED_MODULE_47__components_coupon_detail_coupon_detail_component__["a" /* CouponDetailComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_20__guards_auth_guard__["a" /* AuthGuard */], __WEBPACK_IMPORTED_MODULE_21__guards_admin_guard__["a" /* AdminGuard */]] },
-    { path: '**', component: __WEBPACK_IMPORTED_MODULE_42__components_page_not_found_page_not_found_component__["a" /* PageNotFoundComponent */] }
+    { path: '', component: __WEBPACK_IMPORTED_MODULE_44__components_home_home_component__["a" /* HomeComponent */] },
+    { path: 'login', component: __WEBPACK_IMPORTED_MODULE_25__components_login_login_component__["a" /* LoginComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_23__guards_login_guard__["a" /* LoginGuard */]] },
+    { path: 'register', component: __WEBPACK_IMPORTED_MODULE_26__components_register_register_component__["a" /* RegisterComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_23__guards_login_guard__["a" /* LoginGuard */]] },
+    { path: 'dashboard/:role/:id', component: __WEBPACK_IMPORTED_MODULE_27__components_dashboard_dashboard_component__["a" /* DashboardComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_21__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'clients', component: __WEBPACK_IMPORTED_MODULE_32__components_clients_clients_component__["a" /* ClientsComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_21__guards_auth_guard__["a" /* AuthGuard */], __WEBPACK_IMPORTED_MODULE_22__guards_admin_guard__["a" /* AdminGuard */]] },
+    { path: 'client-detail/:id', component: __WEBPACK_IMPORTED_MODULE_33__components_client_detail_client_detail_component__["a" /* ClientDetailComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_21__guards_auth_guard__["a" /* AuthGuard */], __WEBPACK_IMPORTED_MODULE_22__guards_admin_guard__["a" /* AdminGuard */]] },
+    { path: 'add-client', component: __WEBPACK_IMPORTED_MODULE_34__components_client_add_client_add_component__["a" /* ClientAddComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_21__guards_auth_guard__["a" /* AuthGuard */], __WEBPACK_IMPORTED_MODULE_22__guards_admin_guard__["a" /* AdminGuard */]] },
+    { path: 'edit-client/:id', component: __WEBPACK_IMPORTED_MODULE_35__components_client_edit_client_edit_component__["a" /* ClientEditComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_21__guards_auth_guard__["a" /* AuthGuard */], __WEBPACK_IMPORTED_MODULE_22__guards_admin_guard__["a" /* AdminGuard */]] },
+    { path: 'cart/:role/:id', component: __WEBPACK_IMPORTED_MODULE_38__components_cart_cart_component__["a" /* CartComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_21__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'sale/:role', component: __WEBPACK_IMPORTED_MODULE_28__components_product_sale_product_sale_component__["a" /* ProductSaleComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_21__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'products', component: __WEBPACK_IMPORTED_MODULE_29__components_products_products_component__["a" /* ProductsComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_21__guards_auth_guard__["a" /* AuthGuard */], __WEBPACK_IMPORTED_MODULE_22__guards_admin_guard__["a" /* AdminGuard */]] },
+    { path: 'product-detail/:id', component: __WEBPACK_IMPORTED_MODULE_30__components_product_detail_product_detail_component__["a" /* ProductDetailComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_21__guards_auth_guard__["a" /* AuthGuard */], __WEBPACK_IMPORTED_MODULE_22__guards_admin_guard__["a" /* AdminGuard */]] },
+    { path: 'add-product', component: __WEBPACK_IMPORTED_MODULE_31__components_product_add_product_add_component__["a" /* ProductAddComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_21__guards_auth_guard__["a" /* AuthGuard */], __WEBPACK_IMPORTED_MODULE_22__guards_admin_guard__["a" /* AdminGuard */]] },
+    { path: 'edit-product/:id', component: __WEBPACK_IMPORTED_MODULE_36__components_product_edit_product_edit_component__["a" /* ProductEditComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_21__guards_auth_guard__["a" /* AuthGuard */], __WEBPACK_IMPORTED_MODULE_22__guards_admin_guard__["a" /* AdminGuard */]] },
+    { path: 'client-orders', component: __WEBPACK_IMPORTED_MODULE_39__components_client_orders_client_orders_component__["a" /* ClientOrdersComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_21__guards_auth_guard__["a" /* AuthGuard */], __WEBPACK_IMPORTED_MODULE_22__guards_admin_guard__["a" /* AdminGuard */]] },
+    { path: 'vendor-orders', component: __WEBPACK_IMPORTED_MODULE_41__components_vendor_orders_vendor_orders_component__["a" /* VendorOrdersComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_21__guards_auth_guard__["a" /* AuthGuard */], __WEBPACK_IMPORTED_MODULE_22__guards_admin_guard__["a" /* AdminGuard */]] },
+    { path: 'vendor-order-detail/:id', component: __WEBPACK_IMPORTED_MODULE_42__components_vendor_order_detail_vendor_order_detail_component__["a" /* VendorOrderDetailComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_21__guards_auth_guard__["a" /* AuthGuard */], __WEBPACK_IMPORTED_MODULE_22__guards_admin_guard__["a" /* AdminGuard */]] },
+    { path: 'client-order-detail/:role/:id', component: __WEBPACK_IMPORTED_MODULE_40__components_client_order_detail_client_order_detail_component__["a" /* ClientOrderDetailComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_21__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'coupons', component: __WEBPACK_IMPORTED_MODULE_47__components_coupon_coupon_component__["a" /* CouponComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_21__guards_auth_guard__["a" /* AuthGuard */], __WEBPACK_IMPORTED_MODULE_22__guards_admin_guard__["a" /* AdminGuard */]] },
+    { path: 'add-coupon', component: __WEBPACK_IMPORTED_MODULE_49__components_coupon_add_coupon_add_component__["a" /* CouponAddComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_21__guards_auth_guard__["a" /* AuthGuard */], __WEBPACK_IMPORTED_MODULE_22__guards_admin_guard__["a" /* AdminGuard */]] },
+    { path: 'coupon/:id', component: __WEBPACK_IMPORTED_MODULE_48__components_coupon_detail_coupon_detail_component__["a" /* CouponDetailComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_21__guards_auth_guard__["a" /* AuthGuard */], __WEBPACK_IMPORTED_MODULE_22__guards_admin_guard__["a" /* AdminGuard */]] },
+    { path: '**', component: __WEBPACK_IMPORTED_MODULE_43__components_page_not_found_page_not_found_component__["a" /* PageNotFoundComponent */] }
 ];
 var AppModule = (function () {
     function AppModule() {
@@ -231,82 +233,84 @@ var AppModule = (function () {
 AppModule = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__angular_core__["NgModule"])({
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_23__app_component__["a" /* AppComponent */],
-            __WEBPACK_IMPORTED_MODULE_24__components_login_login_component__["a" /* LoginComponent */],
-            __WEBPACK_IMPORTED_MODULE_25__components_register_register_component__["a" /* RegisterComponent */],
-            __WEBPACK_IMPORTED_MODULE_26__components_dashboard_dashboard_component__["a" /* DashboardComponent */],
-            __WEBPACK_IMPORTED_MODULE_27__components_product_sale_product_sale_component__["a" /* ProductSaleComponent */],
-            __WEBPACK_IMPORTED_MODULE_28__components_products_products_component__["a" /* ProductsComponent */],
-            __WEBPACK_IMPORTED_MODULE_29__components_product_detail_product_detail_component__["a" /* ProductDetailComponent */],
-            __WEBPACK_IMPORTED_MODULE_30__components_product_add_product_add_component__["a" /* ProductAddComponent */],
-            __WEBPACK_IMPORTED_MODULE_31__components_clients_clients_component__["a" /* ClientsComponent */],
-            __WEBPACK_IMPORTED_MODULE_32__components_client_detail_client_detail_component__["a" /* ClientDetailComponent */],
-            __WEBPACK_IMPORTED_MODULE_33__components_client_add_client_add_component__["a" /* ClientAddComponent */],
-            __WEBPACK_IMPORTED_MODULE_34__components_client_edit_client_edit_component__["a" /* ClientEditComponent */],
-            __WEBPACK_IMPORTED_MODULE_35__components_product_edit_product_edit_component__["a" /* ProductEditComponent */],
-            __WEBPACK_IMPORTED_MODULE_36__components_sidebar_sidebar_component__["a" /* SidebarComponent */],
-            __WEBPACK_IMPORTED_MODULE_37__components_cart_cart_component__["a" /* CartComponent */],
-            __WEBPACK_IMPORTED_MODULE_38__components_client_orders_client_orders_component__["a" /* ClientOrdersComponent */],
-            __WEBPACK_IMPORTED_MODULE_39__components_client_order_detail_client_order_detail_component__["a" /* ClientOrderDetailComponent */],
-            __WEBPACK_IMPORTED_MODULE_40__components_vendor_orders_vendor_orders_component__["a" /* VendorOrdersComponent */],
-            __WEBPACK_IMPORTED_MODULE_41__components_vendor_order_detail_vendor_order_detail_component__["a" /* VendorOrderDetailComponent */],
-            __WEBPACK_IMPORTED_MODULE_42__components_page_not_found_page_not_found_component__["a" /* PageNotFoundComponent */],
-            __WEBPACK_IMPORTED_MODULE_43__components_home_home_component__["a" /* HomeComponent */],
-            __WEBPACK_IMPORTED_MODULE_44__components_navbar_navbar_component__["a" /* NavbarComponent */],
-            __WEBPACK_IMPORTED_MODULE_45__components_footer_footer_component__["a" /* FooterComponent */],
-            __WEBPACK_IMPORTED_MODULE_7__components_product_add_productAdd_directive__["a" /* FileValueAccessor */],
-            __WEBPACK_IMPORTED_MODULE_46__components_coupon_coupon_component__["a" /* CouponComponent */],
-            __WEBPACK_IMPORTED_MODULE_47__components_coupon_detail_coupon_detail_component__["a" /* CouponDetailComponent */],
-            __WEBPACK_IMPORTED_MODULE_48__components_coupon_add_coupon_add_component__["a" /* CouponAddComponent */],
-            __WEBPACK_IMPORTED_MODULE_8__components_coupon_add_coupon_add_directive__["a" /* UppercaseDirective */]
+            __WEBPACK_IMPORTED_MODULE_24__app_component__["a" /* AppComponent */],
+            __WEBPACK_IMPORTED_MODULE_25__components_login_login_component__["a" /* LoginComponent */],
+            __WEBPACK_IMPORTED_MODULE_26__components_register_register_component__["a" /* RegisterComponent */],
+            __WEBPACK_IMPORTED_MODULE_27__components_dashboard_dashboard_component__["a" /* DashboardComponent */],
+            __WEBPACK_IMPORTED_MODULE_28__components_product_sale_product_sale_component__["a" /* ProductSaleComponent */],
+            __WEBPACK_IMPORTED_MODULE_29__components_products_products_component__["a" /* ProductsComponent */],
+            __WEBPACK_IMPORTED_MODULE_30__components_product_detail_product_detail_component__["a" /* ProductDetailComponent */],
+            __WEBPACK_IMPORTED_MODULE_31__components_product_add_product_add_component__["a" /* ProductAddComponent */],
+            __WEBPACK_IMPORTED_MODULE_32__components_clients_clients_component__["a" /* ClientsComponent */],
+            __WEBPACK_IMPORTED_MODULE_33__components_client_detail_client_detail_component__["a" /* ClientDetailComponent */],
+            __WEBPACK_IMPORTED_MODULE_34__components_client_add_client_add_component__["a" /* ClientAddComponent */],
+            __WEBPACK_IMPORTED_MODULE_35__components_client_edit_client_edit_component__["a" /* ClientEditComponent */],
+            __WEBPACK_IMPORTED_MODULE_36__components_product_edit_product_edit_component__["a" /* ProductEditComponent */],
+            __WEBPACK_IMPORTED_MODULE_37__components_sidebar_sidebar_component__["a" /* SidebarComponent */],
+            __WEBPACK_IMPORTED_MODULE_38__components_cart_cart_component__["a" /* CartComponent */],
+            __WEBPACK_IMPORTED_MODULE_39__components_client_orders_client_orders_component__["a" /* ClientOrdersComponent */],
+            __WEBPACK_IMPORTED_MODULE_40__components_client_order_detail_client_order_detail_component__["a" /* ClientOrderDetailComponent */],
+            __WEBPACK_IMPORTED_MODULE_41__components_vendor_orders_vendor_orders_component__["a" /* VendorOrdersComponent */],
+            __WEBPACK_IMPORTED_MODULE_42__components_vendor_order_detail_vendor_order_detail_component__["a" /* VendorOrderDetailComponent */],
+            __WEBPACK_IMPORTED_MODULE_43__components_page_not_found_page_not_found_component__["a" /* PageNotFoundComponent */],
+            __WEBPACK_IMPORTED_MODULE_44__components_home_home_component__["a" /* HomeComponent */],
+            __WEBPACK_IMPORTED_MODULE_45__components_navbar_navbar_component__["a" /* NavbarComponent */],
+            __WEBPACK_IMPORTED_MODULE_46__components_footer_footer_component__["a" /* FooterComponent */],
+            __WEBPACK_IMPORTED_MODULE_8__components_product_add_productAdd_directive__["a" /* FileValueAccessor */],
+            __WEBPACK_IMPORTED_MODULE_47__components_coupon_coupon_component__["a" /* CouponComponent */],
+            __WEBPACK_IMPORTED_MODULE_48__components_coupon_detail_coupon_detail_component__["a" /* CouponDetailComponent */],
+            __WEBPACK_IMPORTED_MODULE_49__components_coupon_add_coupon_add_component__["a" /* CouponAddComponent */],
+            __WEBPACK_IMPORTED_MODULE_9__components_coupon_add_coupon_add_directive__["a" /* UppercaseDirective */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["BrowserModule"],
             __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_animations__["a" /* BrowserAnimationsModule */],
             __WEBPACK_IMPORTED_MODULE_3__angular_forms__["FormsModule"],
             __WEBPACK_IMPORTED_MODULE_3__angular_forms__["ReactiveFormsModule"],
-            __WEBPACK_IMPORTED_MODULE_6_angular2_flash_messages__["FlashMessagesModule"],
+            __WEBPACK_IMPORTED_MODULE_7_angular2_flash_messages__["FlashMessagesModule"],
             __WEBPACK_IMPORTED_MODULE_5__angular_http__["HttpModule"],
             __WEBPACK_IMPORTED_MODULE_4__angular_router__["RouterModule"].forRoot(appRoutes),
-            __WEBPACK_IMPORTED_MODULE_9_primeng_primeng__["FileUploadModule"],
-            __WEBPACK_IMPORTED_MODULE_9_primeng_primeng__["InputTextModule"],
-            __WEBPACK_IMPORTED_MODULE_9_primeng_primeng__["InputTextareaModule"],
-            __WEBPACK_IMPORTED_MODULE_9_primeng_primeng__["SpinnerModule"],
-            __WEBPACK_IMPORTED_MODULE_9_primeng_primeng__["InputMaskModule"],
-            __WEBPACK_IMPORTED_MODULE_9_primeng_primeng__["PanelModule"],
-            __WEBPACK_IMPORTED_MODULE_9_primeng_primeng__["ButtonModule"],
-            __WEBPACK_IMPORTED_MODULE_9_primeng_primeng__["MessagesModule"],
-            __WEBPACK_IMPORTED_MODULE_9_primeng_primeng__["GrowlModule"],
-            __WEBPACK_IMPORTED_MODULE_9_primeng_primeng__["MenuModule"],
-            __WEBPACK_IMPORTED_MODULE_9_primeng_primeng__["DataTableModule"],
-            __WEBPACK_IMPORTED_MODULE_9_primeng_primeng__["SharedModule"],
-            __WEBPACK_IMPORTED_MODULE_9_primeng_primeng__["ConfirmDialogModule"],
-            __WEBPACK_IMPORTED_MODULE_9_primeng_primeng__["SplitButtonModule"],
-            __WEBPACK_IMPORTED_MODULE_9_primeng_primeng__["DropdownModule"],
-            __WEBPACK_IMPORTED_MODULE_9_primeng_primeng__["RadioButtonModule"],
-            __WEBPACK_IMPORTED_MODULE_9_primeng_primeng__["DialogModule"],
-            __WEBPACK_IMPORTED_MODULE_9_primeng_primeng__["DataGridModule"],
-            __WEBPACK_IMPORTED_MODULE_9_primeng_primeng__["TooltipModule"],
-            __WEBPACK_IMPORTED_MODULE_9_primeng_primeng__["CheckboxModule"],
-            __WEBPACK_IMPORTED_MODULE_9_primeng_primeng__["ToggleButtonModule"]
+            __WEBPACK_IMPORTED_MODULE_10_primeng_primeng__["FileUploadModule"],
+            __WEBPACK_IMPORTED_MODULE_10_primeng_primeng__["InputTextModule"],
+            __WEBPACK_IMPORTED_MODULE_10_primeng_primeng__["InputTextareaModule"],
+            __WEBPACK_IMPORTED_MODULE_10_primeng_primeng__["SpinnerModule"],
+            __WEBPACK_IMPORTED_MODULE_10_primeng_primeng__["InputMaskModule"],
+            __WEBPACK_IMPORTED_MODULE_10_primeng_primeng__["PanelModule"],
+            __WEBPACK_IMPORTED_MODULE_10_primeng_primeng__["ButtonModule"],
+            __WEBPACK_IMPORTED_MODULE_10_primeng_primeng__["MessagesModule"],
+            __WEBPACK_IMPORTED_MODULE_10_primeng_primeng__["GrowlModule"],
+            __WEBPACK_IMPORTED_MODULE_10_primeng_primeng__["MenuModule"],
+            __WEBPACK_IMPORTED_MODULE_10_primeng_primeng__["DataTableModule"],
+            __WEBPACK_IMPORTED_MODULE_10_primeng_primeng__["SharedModule"],
+            __WEBPACK_IMPORTED_MODULE_10_primeng_primeng__["ConfirmDialogModule"],
+            __WEBPACK_IMPORTED_MODULE_10_primeng_primeng__["SplitButtonModule"],
+            __WEBPACK_IMPORTED_MODULE_10_primeng_primeng__["DropdownModule"],
+            __WEBPACK_IMPORTED_MODULE_10_primeng_primeng__["RadioButtonModule"],
+            __WEBPACK_IMPORTED_MODULE_10_primeng_primeng__["DialogModule"],
+            __WEBPACK_IMPORTED_MODULE_10_primeng_primeng__["DataGridModule"],
+            __WEBPACK_IMPORTED_MODULE_10_primeng_primeng__["TooltipModule"],
+            __WEBPACK_IMPORTED_MODULE_10_primeng_primeng__["CheckboxModule"],
+            __WEBPACK_IMPORTED_MODULE_10_primeng_primeng__["ToggleButtonModule"],
+            __WEBPACK_IMPORTED_MODULE_6_ngx_progressbar__["a" /* NgProgressModule */]
         ],
         providers: [
-            __WEBPACK_IMPORTED_MODULE_9_primeng_primeng__["ConfirmationService"],
-            __WEBPACK_IMPORTED_MODULE_10__services_auth_service__["a" /* AuthService */],
-            __WEBPACK_IMPORTED_MODULE_11__services_local_storage_service__["a" /* LocalStorageService */],
-            __WEBPACK_IMPORTED_MODULE_12__services_http_service__["a" /* HttpService */],
-            __WEBPACK_IMPORTED_MODULE_13__services_client_service__["a" /* ClientService */],
-            __WEBPACK_IMPORTED_MODULE_14__services_product_service__["a" /* ProductService */],
-            __WEBPACK_IMPORTED_MODULE_15__services_order_service__["a" /* OrderService */],
-            __WEBPACK_IMPORTED_MODULE_16__services_cart_service__["a" /* CartService */],
-            __WEBPACK_IMPORTED_MODULE_17__services_coupon_service__["a" /* CouponService */],
-            __WEBPACK_IMPORTED_MODULE_18__services_vendor_order_service__["a" /* VendorOrderService */],
-            __WEBPACK_IMPORTED_MODULE_20__guards_auth_guard__["a" /* AuthGuard */],
-            __WEBPACK_IMPORTED_MODULE_21__guards_admin_guard__["a" /* AdminGuard */],
-            __WEBPACK_IMPORTED_MODULE_22__guards_login_guard__["a" /* LoginGuard */],
-            __WEBPACK_IMPORTED_MODULE_19__services_activity_service__["a" /* ActivityService */]
+            __WEBPACK_IMPORTED_MODULE_10_primeng_primeng__["ConfirmationService"],
+            __WEBPACK_IMPORTED_MODULE_11__services_auth_service__["a" /* AuthService */],
+            __WEBPACK_IMPORTED_MODULE_12__services_local_storage_service__["a" /* LocalStorageService */],
+            __WEBPACK_IMPORTED_MODULE_13__services_http_service__["a" /* HttpService */],
+            __WEBPACK_IMPORTED_MODULE_14__services_client_service__["a" /* ClientService */],
+            __WEBPACK_IMPORTED_MODULE_15__services_product_service__["a" /* ProductService */],
+            __WEBPACK_IMPORTED_MODULE_16__services_order_service__["a" /* OrderService */],
+            __WEBPACK_IMPORTED_MODULE_17__services_cart_service__["a" /* CartService */],
+            __WEBPACK_IMPORTED_MODULE_18__services_coupon_service__["a" /* CouponService */],
+            __WEBPACK_IMPORTED_MODULE_19__services_vendor_order_service__["a" /* VendorOrderService */],
+            __WEBPACK_IMPORTED_MODULE_21__guards_auth_guard__["a" /* AuthGuard */],
+            __WEBPACK_IMPORTED_MODULE_22__guards_admin_guard__["a" /* AdminGuard */],
+            __WEBPACK_IMPORTED_MODULE_23__guards_login_guard__["a" /* LoginGuard */],
+            __WEBPACK_IMPORTED_MODULE_20__services_activity_service__["a" /* ActivityService */],
+            { provide: __WEBPACK_IMPORTED_MODULE_5__angular_http__["BrowserXhr"], useClass: __WEBPACK_IMPORTED_MODULE_6_ngx_progressbar__["b" /* NgProgressBrowserXhr */] }
         ],
-        bootstrap: [__WEBPACK_IMPORTED_MODULE_23__app_component__["a" /* AppComponent */]]
+        bootstrap: [__WEBPACK_IMPORTED_MODULE_24__app_component__["a" /* AppComponent */]]
     })
 ], AppModule);
 
