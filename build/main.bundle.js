@@ -2084,6 +2084,7 @@ var DashboardComponent = (function () {
                 else {
                     console.log('Activity ID is undefined');
                 }
+                _this.payVendor = false;
             }
         });
     };
