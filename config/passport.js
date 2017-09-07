@@ -25,8 +25,8 @@ module.exports = (passport) => {
                     return done(null, false);
                 }
             });
-        } else if(jwt_payload._doc.role == 'Client') {
-            Client.getClientById(jwt_payload._doc._id, (err, client) => {
+        } else if(jwt_payload.role == 'Client') {
+            Client.getClientById(jwt_payload._id, (err, client) => {
                 if(err) {
                     return done(err, false);
                 }

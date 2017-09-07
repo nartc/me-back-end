@@ -56,9 +56,7 @@ router.post('/authenticateClient', (req, res, next) => {
         Client.comparePassword(password, client.password, (err, isMatched) => {
             if(err) throw err;
             if(isMatched) {
-                const token = jwt.sign(client, config.secret, {
-                    expiresIn: 180000 //30 Minutes
-                });
+                const token = jwt.sign(JSON.stringify(client), config.secret);
 
                 res.json({
                     success: true,
@@ -71,6 +69,18 @@ router.post('/authenticateClient', (req, res, next) => {
                         firstName: client.firstName
                     }
                 });
+
+                console.log(res.json({
+                    success: true,
+                    token: 'JWT '+token,
+                    msg: 'Logged In',
+                    client: {
+                        _id: client._id,
+                        email: client.email,
+                        role: client.role,
+                        firstName: client.firstName
+                    }
+                }));
             } else {
                 return res.json({
                     success: false,
