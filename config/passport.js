@@ -13,8 +13,8 @@ module.exports = (passport) => {
 
     passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
         console.log('jwt_payload', jwt_payload);
-        if(jwt_payload._doc.role == 'Admin') {
-            Admin.getAdminById(jwt_payload._doc._id, (err, admin) => {
+        if(jwt_payload.role == 'Admin') {
+            Admin.getAdminById(jwt_payload._id, (err, admin) => {
                 if(err) {
                     return done(err, false);
                 }
