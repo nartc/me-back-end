@@ -2062,24 +2062,30 @@ var DashboardComponent = (function () {
         });
     };
     DashboardComponent.prototype.onPayVendorClick = function () {
+        var _this = this;
         console.log(this.totalExpenses, this.totalRevenue);
         var _placeholder = 0;
         var _revenue = -this.totalExpenses;
         var _expense = -this.totalExpenses;
         _placeholder = this.totalRevenue - this.totalExpenses;
-        this.totalRevenue = _placeholder;
-        this.totalExpenses = 0;
-        if (this.activityId) {
-            this.activityService.updateRevenue(this.activityId, _revenue).subscribe(function (data) {
-                console.log(data);
-            });
-            this.activityService.updateExpense(this.activityId, _expense).subscribe(function (data) {
-                console.log(data);
-            });
-        }
-        else {
-            console.log('Activity ID is undefined');
-        }
+        this.confirmationService.confirm({
+            message: 'Confirm payment to vendor?',
+            accept: function () {
+                _this.totalRevenue = _placeholder;
+                _this.totalExpenses = 0;
+                if (_this.activityId) {
+                    _this.activityService.updateRevenue(_this.activityId, _revenue).subscribe(function (data) {
+                        console.log(data);
+                    });
+                    _this.activityService.updateExpense(_this.activityId, _expense).subscribe(function (data) {
+                        console.log(data);
+                    });
+                }
+                else {
+                    console.log('Activity ID is undefined');
+                }
+            }
+        });
     };
     return DashboardComponent;
 }());
