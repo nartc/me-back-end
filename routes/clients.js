@@ -54,12 +54,10 @@ router.post('/authenticateClient', (req, res, next) => {
         }
 
         Client.comparePassword(password, client.password, (err, isMatched) => {
-            if(err) {
-                console.log(err);
-            }
+            if(err) throw err;
             if(isMatched) {
                 const token = jwt.sign(client, config.secret, {
-                    // expiresIn: 180000 //30 Minutes
+                    expiresIn: 180000 //30 Minutes
                 });
 
                 res.json({
