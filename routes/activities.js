@@ -6,7 +6,7 @@ const Activity = require('../models/activity');
 
 //Add Activity
 router.post('/addActivity', (req, res) => {
-    let newActivity = new Activitiy({
+    let newActivity = new Activity({
         revenue: 0,
         expense: 0
     });
